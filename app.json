@@ -1,0 +1,57 @@
+{
+  "pages": [
+    "pages/history/history",
+    "pages/historyInfo/historyInfo",
+    "pages/myClass/myClass",
+    "pages/home/home",
+    "pages/newClass/newClass",
+    "pages/search/search"
+  ],
+  "usingComponents": {
+    "t-tab-bar": "tdesign-miniprogram/tab-bar/tab-bar",
+    "t-tab-bar-item": "tdesign-miniprogram/tab-bar/tab-bar-item",
+    "t-navbar": "tdesign-miniprogram/navbar/navbar",
+    "t-cell": "tdesign-miniprogram/cell/cell"
+  },
+
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "Weixin",
+    "navigationBarTextStyle": "black",
+    "navigationStyle": "custom"
+  },
+ 
+  "sitemapLocation": "sitemap.json",
+  "tabBar": {
+    "borderStyle": "white",
+    "color": "#010101",
+    "selectedColor": "#216BCB",
+    "list": [
+        {
+            "pagePath": "pages/history/history",
+            "text": "历史",
+            "iconPath": "/icons/history.png",
+            "selectedIconPath": "/icons/history-selected.png"
+        },
+        {
+            "pagePath": "pages/myClass/myClass",
+            "text": "班级",
+            "iconPath": "/icons/class-selected.png",
+            "selectedIconPath": "/icons/class.png"
+        },
+        {
+            "pagePath": "pages/home/home",
+            "text": "我的",
+            "iconPath": "/icons/home.png",
+            "selectedIconPath": "/icons/home-selected.png"
+        }
+        
+    ],
+    "sitemapLocation": "sitemap.json",
+    "lazyCodeLoading": "requiredComponents"
+}
+
+  
+
+}
