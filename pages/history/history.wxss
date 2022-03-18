@@ -1,1 +1,10 @@
 /* pages/history/history.wxss */
+
+.search{
+    color:tomato
+}
+
+.search_box{
+    margin: 20rpx;
+    color: rgb(255, 0, 0);
+}

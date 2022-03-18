@@ -3,6 +3,8 @@ Page({
 
 
     data: {
+        //搜索内容
+        value: '',
         //班级列表
         classList: [
             {

@@ -8,10 +8,20 @@
     "pages/search/search"
   ],
   "usingComponents": {
+
     "t-tab-bar": "tdesign-miniprogram/tab-bar/tab-bar",
     "t-tab-bar-item": "tdesign-miniprogram/tab-bar/tab-bar-item",
     "t-navbar": "tdesign-miniprogram/navbar/navbar",
-    "t-cell": "tdesign-miniprogram/cell/cell"
+    "t-cell": "tdesign-miniprogram/cell/cell",
+    "t-swiper": "tdesign-miniprogram/swiper/swiper",
+    "t-swiper-item": "tdesign-miniprogram/swiper/swiper-item",
+    "t-swiper-nav": "tdesign-miniprogram/swiper/swiper-nav",
+    "t-button": "tdesign-miniprogram/button/button",
+    "t-avatar": "tdesign-miniprogram/avatar/avatar",
+    "t-avatar-group": "tdesign-miniprogram/avatar/avatar-group",
+    "t-search": "tdesign-miniprogram/search/search",
+    "van-search": "@vant/weapp/search/index"
+
   },
 
   "window": {
@@ -21,37 +31,36 @@
     "navigationBarTextStyle": "black",
     "navigationStyle": "custom"
   },
- 
+
   "sitemapLocation": "sitemap.json",
   "tabBar": {
     "borderStyle": "white",
     "color": "#010101",
     "selectedColor": "#216BCB",
-    "list": [
-        {
-            "pagePath": "pages/history/history",
-            "text": "历史",
-            "iconPath": "/icons/history.png",
-            "selectedIconPath": "/icons/history-selected.png"
-        },
-        {
-            "pagePath": "pages/myClass/myClass",
-            "text": "班级",
-            "iconPath": "/icons/class-selected.png",
-            "selectedIconPath": "/icons/class.png"
-        },
-        {
-            "pagePath": "pages/home/home",
-            "text": "我的",
-            "iconPath": "/icons/home.png",
-            "selectedIconPath": "/icons/home-selected.png"
-        }
-        
+    "list": [{
+        "pagePath": "pages/history/history",
+        "text": "历史",
+        "iconPath": "/icons/history.png",
+        "selectedIconPath": "/icons/history-selected.png"
+      },
+      {
+        "pagePath": "pages/myClass/myClass",
+        "text": "班级",
+        "iconPath": "/icons/class-selected.png",
+        "selectedIconPath": "/icons/class.png"
+      },
+      {
+        "pagePath": "pages/home/home",
+        "text": "我的",
+        "iconPath": "/icons/home.png",
+        "selectedIconPath": "/icons/home-selected.png"
+      }
+
     ],
     "sitemapLocation": "sitemap.json",
     "lazyCodeLoading": "requiredComponents"
-}
+  }
 
-  
+
 
 }
