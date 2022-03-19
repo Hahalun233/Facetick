@@ -27,9 +27,9 @@
         "uploadWithSourceMap": true,
         "compileHotReLoad": false,
         "lazyloadPlaceholderEnable": false,
-        "useMultiFrameRuntime": false,
-        "useApiHook": false,
-        "useApiHostProcess": false,
+        "useMultiFrameRuntime": true,
+        "useApiHook": true,
+        "useApiHostProcess": true,
         "babelSetting": {
             "ignore": [],
             "disablePlugins": [],
@@ -43,7 +43,7 @@
             {
                 "packageJsonPath": "./package.json",
                 "miniprogramNpmDistDir": "./"
-              }
+            }
         ],
         "minifyWXSS": true,
         "disableUseStrict": false,
