@@ -1,0 +1,61 @@
+<!--pages/myClassInfo/myClassInfo.wxml-->
+<t-navbar title="班级信息" leftIcon="chevron-left" homeIcon="home" bindgohome="onGoHome" t-class-left-icon="left-icon-back" t-class-home-icon="home-icon" t-class-title="nav-title" />
+<van-row>
+  <van-col span="16">
+    <van-card desc="RB软工互183，184" title="算法设计与分析" thumb="{{ imageURL }}">
+    </van-card>
+  </van-col>
+  <van-col span="8">
+    <view class="buttonContiner">
+      <van-col>
+        <van-row span="8">
+          <van-button round type="info">发起签到</van-button>
+        </van-row>
+        <view class="addContiner">
+          <van-row span="8">
+            <van-button round type="info">添加学生</van-button>
+          </van-row>
+        </view>
+      </van-col>
+    </view>
+  </van-col>
+</van-row>
+
+
+
+
+<van-grid direction="horizontal" column-num="2">
+  <van-grid-item text="头像" />
+  <van-grid-item text="姓名" />
+</van-grid>
+
+
+<view wx:for="{{studentList}}">
+
+  <van-row>
+    <van-col span="4" offset="3">
+      <van-image radius="15px" width="5rem" height="5rem" src="/assets/images/avr.JPG" />
+    </van-col>
+
+    <view class="name">
+      <van-col span="8" offset="8">
+        <van-cell-group inset>
+          <van-cell title="{{item.name}}" center="true" />
+        </van-cell-group>
+      </van-col>
+    </view>
+
+  </van-row>
+</view>
+
+
+
+
+
+
+
+
+
+<!-- <view>
+  <t-cell wx:for="{{studentList}}" title="{{item.name}}" align="top" t-class-image="title-image-large" image="/assets/images/avr.JPG" />
+</view> -->

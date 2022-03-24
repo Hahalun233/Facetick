@@ -7,7 +7,7 @@
   </view>
   
   <view>
-    <view class='order'>
+    <!-- <view class='order'>
       <view class='title-box'>
         <view class='title'>我的订单</view>
         <view class='title-line'></view>
@@ -22,7 +22,7 @@
           <view>小吃</view>
         </navigator>
       </view>
-    </view>
+    </view> -->
 
     <view class='other'>
       <view class='share other-item'>

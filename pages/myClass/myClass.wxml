@@ -1,2 +1,9 @@
 <!--pages/myClass/myClass.wxml-->
-<text>pages/myClass/myClass.wxml</text>
+<!--pages/history/history.wxml-->
+
+<t-navbar title="Facetick" t-class-title="nav-title" />
+
+<van-search value="{{ value }}" placeholder="请输入搜索关键词" bind:change="onChange"
+  bind:search="onSearch" />
+
+<t-cell class="cell" wx:for="{{classList}}" hover="true" title="{{item.classInfo}}" description="{{item.className}}" align="top" t-class-image="title-image-large" image="/icons/classphoto.png" url="/pages/myClassInfo/myClassInfo" />

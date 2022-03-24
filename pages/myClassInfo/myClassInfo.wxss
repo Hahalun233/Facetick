@@ -1,0 +1,22 @@
+/* pages/myClassInfo/myClassInfo.wxss */
+.button{
+    display: inline-block;
+    border: tomato;
+    border-width: 20rpx;
+}
+.vant-button{
+    border: tomato;
+    border-width: 20rpx;
+    background-color: tomato;
+}
+
+.buttonContiner{
+    margin: 15rpx;
+}
+.addContiner{
+    margin-top: 15rpx;
+}
+.name{
+    padding-top: 50rpx;
+}
+

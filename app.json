@@ -5,7 +5,9 @@
     "pages/myClass/myClass",
     "pages/home/home",
     "pages/newClass/newClass",
-    "pages/search/search"
+    "pages/search/search",
+    "pages/myClassInfo/myClassInfo"
+    
   ],
   "usingComponents": {
 
@@ -22,7 +24,16 @@
     "t-search": "tdesign-miniprogram/search/search",
     "van-search": "@vant/weapp/search/index",
     "van-cell": "@vant/weapp/cell/index",
-    "van-cell-group": "@vant/weapp/cell-group/index"
+    "van-cell-group": "@vant/weapp/cell-group/index",
+    "van-card": "@vant/weapp/card/index",
+    "van-button": "@vant/weapp/button/index",
+    "van-row": "@vant/weapp/row/index",
+    "van-col": "@vant/weapp/col/index",
+    "van-divider": "@vant/weapp/divider/index",
+    "van-grid": "@vant/weapp/grid/index",
+    "van-grid-item": "@vant/weapp/grid-item/index",
+    "van-image": "@vant/weapp/image/index"
+    
 
   },
 

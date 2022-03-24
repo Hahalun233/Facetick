@@ -69,7 +69,7 @@ Page({
     onSearch() {
         //
     },
-  
+
 
 
     getClass() {
@@ -105,7 +105,7 @@ Page({
 
 
     onLoad: function (options) {
-
+        // this.getClass()
     },
 
 

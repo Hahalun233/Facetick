@@ -23,6 +23,18 @@
                     "pathName": "pages/history/history",
                     "query": "",
                     "scene": null
+                },
+                {
+                    "name": "myClassInfo",
+                    "pathName": "pages/myClassInfo/myClassInfo",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "myClass",
+                    "pathName": "pages/myClass/myClass",
+                    "query": "",
+                    "scene": null
                 }
             ]
         }
