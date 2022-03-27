@@ -1,8 +1,10 @@
 // pages/history/history.js
+const app = getApp();
 Page({
 
 
     data: {
+        show: app.globalData.show,
         //搜索内容
         value: '',
         //班级列表
@@ -59,6 +61,7 @@ Page({
         isLoading: false
     },
 
+   
 
     onChange(e) {
         this.setData({
@@ -106,6 +109,7 @@ Page({
 
     onLoad: function (options) {
         // this.getClass()
+        this.setData({ show: true });
     },
 
 

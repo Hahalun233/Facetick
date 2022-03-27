@@ -6,10 +6,16 @@
     "pages/home/home",
     "pages/newClass/newClass",
     "pages/search/search",
-    "pages/myClassInfo/myClassInfo"
+    "pages/myClassInfo/myClassInfo",
     
+    
+    "components/login-pop/login-pop"
   ],
   "usingComponents": {
+
+    "login-pop":"/components/login-pop/login-pop",
+
+
 
     "t-tab-bar": "tdesign-miniprogram/tab-bar/tab-bar",
     "t-tab-bar-item": "tdesign-miniprogram/tab-bar/tab-bar-item",
@@ -32,11 +38,9 @@
     "van-divider": "@vant/weapp/divider/index",
     "van-grid": "@vant/weapp/grid/index",
     "van-grid-item": "@vant/weapp/grid-item/index",
-    "van-image": "@vant/weapp/image/index"
-    
-
+    "van-image": "@vant/weapp/image/index",
+    "van-popup": "@vant/weapp/popup/index"
   },
-
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
@@ -44,7 +48,6 @@
     "navigationBarTextStyle": "black",
     "navigationStyle": "custom"
   },
-
   "sitemapLocation": "sitemap.json",
   "tabBar": {
     "borderStyle": "white",
@@ -68,12 +71,8 @@
         "iconPath": "/icons/home.png",
         "selectedIconPath": "/icons/home-selected.png"
       }
-
     ],
     "sitemapLocation": "sitemap.json",
     "lazyCodeLoading": "requiredComponents"
   }
-
-
-
 }

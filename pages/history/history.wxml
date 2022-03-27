@@ -1,4 +1,5 @@
 <!--pages/history/history.wxml-->
+<import src='../../components/login-pop/login-pop' />
 
 <t-navbar title="Facetick" t-class-title="nav-title" />
 
@@ -6,3 +7,6 @@
   bind:search="onSearch" />
 
 <t-cell class="cell" wx:for="{{classList}}" hover="true" title="{{item.classInfo}}" description="{{item.className}}" align="top" t-class-image="title-image-large" image="/icons/classphoto.png" url="/pages/historyInfo/historyInfo" />
+
+
+<login-pop></login-pop>

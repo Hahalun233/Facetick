@@ -1,0 +1,12 @@
+<!--components/login-pop/login-pop.wxml-->
+
+<view>
+  
+   <van-popup
+  show="{{ show }}"
+  position="top"
+  custom-style="height: 20%;"
+  bind:close="onClose"
+/>
+
+</view>
