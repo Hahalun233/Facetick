@@ -52,7 +52,7 @@
         "useCompilerPlugins": false
     },
     "compileType": "miniprogram",
-    "libVersion": "2.19.4",
+    "libVersion": "2.23.2",
     "appid": "wx28676bf27fadea06",
     "projectname": "Facetick_teacher",
     "debugOptions": {

@@ -8,6 +8,7 @@
 bottom: 30px;
 
 right: 20px;
+z-index: 5;
 }
 
 .cell{

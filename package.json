@@ -5,6 +5,7 @@
   "main": ".eslintrc.js",
   "dependencies": {
     "@vant/weapp": "^1.10.2",
+    "miniprogram-api-promise": "^1.0.4",
     "tdesign-miniprogram": "^0.6.1"
   },
   "devDependencies": {},
