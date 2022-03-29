@@ -10,120 +10,86 @@ Page({
         //搜索内容
         value: '',
         //班级列表
-        classList: [{
-                classInfo: "Java程序设计",
-                className: "RB软工数182"
-            },
-            {
-                classInfo: "Web网页设计",
-                className: "RB软工数182"
-            },
-            {
-                classInfo: "大学英语",
-                className: "RB软工数182"
-            },
-            {
-                classInfo: "算法分析与设计",
-                className: "RB软工数182"
-            },
-            {
-                classInfo: "计算机组成原理",
-                className: "RB软工互182"
-            },
-            {
-                classInfo: "Java程序设计",
-                className: "RB软工数182"
-            },
-            {
-                classInfo: "算法分析与设计",
-                className: "RB软工数182"
-            },
-            {
-                classInfo: "计算机组成原理",
-                className: "RB软工互182"
-            },
-            {
-                classInfo: "Java程序设计",
-                className: "RB软工数182"
-            },
-            {
-                classInfo: "算法分析与设计",
-                className: "RB软工数182"
-            },
-            {
-                classInfo: "计算机组成原理",
-                className: "RB软工互182"
-            },
-            {
-                classInfo: "Java程序设计",
-                className: "RB软工数182"
-            },
-        ],
+        classList: [],
+        //节流阀
+        isloading: true,
+        //请求目标开始页数
+        pageNumber: 1,
+        //是否弹出添加班级界面
+        showAddClass: false,
+        //新添加班级名称
+        className: null,
+        //新添加班级教室
+        classRoom: null
     },
-
-
-    getInfo() {
-        myrequest.get("/get",{}).then(res => {
-            console.log(res)
-        })
-    },
-
-    onChange(e) {
+    //弹出层功能
+    showPopup() {
         this.setData({
-            value: e.detail,
-        })
+            showAddClass: true
+        });
     },
+
+    onClose() {
+        this.setData({
+            showAddClass: false
+        });
+    },
+
+    
+
+    //获得班级信息
+    getInfo() {
+
+
+    },
+
+    
 
     getClass() {
-        this.setData({
-            //正在加载
-            isLoading: true
-        })
-        wx.showLoading({
-            title: '加载中...',
-        })
+        const token = wx.getStorageSync('token')
+        const url = "/course/list/" + this.data.pageNumber + "/8"
+        myrequest.get(url, {}, {
+            'token': token
+        }).then(res => {
 
-        wx.request({
-            url: 'url',
-            method: getApp,
-            sucess: ({
-                data: res
-            }) => {
-                this.setData({
-                    classList: [...this.data.classList, ...res.data]
-                })
-            },
-            complete: () => {
-                wx.hideLoading({})
-                this.setData({
-                    //关闭节流阀
-                    isLoading: false
-                })
-            }
-
+            const newClassList = this.data.classList.concat(res.data.courses)
+            this.setData({
+                classList: newClassList
+            })
         })
-
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        // this.getClass()
+
     },
+
+    /**
+     * 页面上拉触底事件的处理函数
+     */
+    onReachBottom: function () {
+
+        // if (this.data.isloading) return
+        this.setData({
+            pageNumber: this.data.pageNumber + 1
+        })
+        this.getClass();
+    },
+
 
     /**
      * 生命周期函数--监听页面初次渲染完成
      */
-    onReady: function () {
-
-    },
+    onReady: function () {},
 
     /**
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
 
+        this.getClass()
     },
 
     /**
@@ -147,12 +113,7 @@ Page({
 
     },
 
-    /**
-     * 页面上拉触底事件的处理函数
-     */
-    onReachBottom: function () {
 
-    },
 
     /**
      * 用户点击右上角分享

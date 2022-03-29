@@ -39,7 +39,8 @@
     "van-grid": "@vant/weapp/grid/index",
     "van-grid-item": "@vant/weapp/grid-item/index",
     "van-image": "@vant/weapp/image/index",
-    "van-popup": "@vant/weapp/popup/index"
+    "van-popup": "@vant/weapp/popup/index",
+    "van-field": "@vant/weapp/field/index"
   },
   "window": {
     "backgroundTextStyle": "light",

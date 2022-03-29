@@ -1,4 +1,4 @@
-const BASE_URL = "http://10.133.49.118:8082/api"
+const BASE_URL = "http://124.222.177.142:8082/api/v1/tc"
 
 class MyRequest {
   request(url, method, params,header) {
@@ -16,8 +16,8 @@ class MyRequest {
     })
   }
 
-  get(url, params) {
-    return this.request(url, "GET", params)
+  get(url, params,header) {
+    return this.request(url, "GET", params,header)
   }
 
   post(url, data, header) {

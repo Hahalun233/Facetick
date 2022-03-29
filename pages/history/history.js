@@ -1,10 +1,12 @@
 // pages/history/history.js
+import myrequest from "../../utils/request";
 const app = getApp();
 Page({
 
 
     data: {
-        show: app.globalData.show,
+        //判断登录状态
+        isLogin: false,
         //搜索内容
         value: '',
         //班级列表
@@ -61,7 +63,11 @@ Page({
         isLoading: false
     },
 
-   
+    changeLogin() {
+        this.setData({
+            isLogin: "true"
+        })
+    },
 
     onChange(e) {
         this.setData({
@@ -108,8 +114,18 @@ Page({
 
 
     onLoad: function (options) {
-        // this.getClass()
-        this.setData({ show: true });
+
+    const token = wx.getStorageSync('token')
+        
+        if (token !== '') {
+            myrequest.get("/isactive",{},{'token':token}).then(res=>{
+                //账号在线
+                if(res.code==200){
+                    this.changeLogin();
+                }
+            })
+            
+        }
     },
 
 

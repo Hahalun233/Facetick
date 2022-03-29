@@ -14,3 +14,8 @@ z-index: 5;
 .cell{
     margin-bottom: 150rpx;
 }
+
+.continer{
+    width: 550rpx;
+    padding-top: 80rpx;
+}

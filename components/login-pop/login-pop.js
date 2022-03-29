@@ -50,7 +50,7 @@ Component({
             timeout: 3000,
             success: login_res => {
               // 2. 小程序通过wx.request()发送code到开发者服务器
-              myrequest.post("/v1/tc/login", {
+              myrequest.post("/login", {
                 code: login_res.code, //临时登录凭证
                 signature: res.signature, //签名
                 encrypteData: res.encryptedData, //用户敏感信息
