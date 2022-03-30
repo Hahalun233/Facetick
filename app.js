@@ -6,6 +6,16 @@ const wxp = wx.p = {}
 promisifyAll(wx,wxp)
 
 App({
+
+
+
+  globalData: {
+    show: true, 
+    userInfo: null,
+    hasUserInfo: false,
+    
+  },
+
   onLaunch() {
     // wx.setStorageSync('token', "token")
     
@@ -26,11 +36,7 @@ App({
 
  
 
-globalData: {
-    show: true, 
-    userInfo: null,
-    hasUserInfo: false
-  }
+
 
   
 })

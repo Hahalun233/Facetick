@@ -1,70 +1,28 @@
 // pages/history/history.js
+
 import myrequest from "../../utils/request";
-const app = getApp();
+
 Page({
 
 
     data: {
         //判断登录状态
-        isLogin: false,
+        isLogin:false,
         //搜索内容
         value: '',
         //班级列表
-        classList: [{
-                classInfo: "Java程序设计",
-                className: "RB软工数182"
-            },
-            {
-                classInfo: "Web网页设计",
-                className: "RB软工数182"
-            },
-            {
-                classInfo: "大学英语",
-                className: "RB软工数182"
-            },
-            {
-                classInfo: "算法分析与设计",
-                className: "RB软工数182"
-            },
-            {
-                classInfo: "计算机组成原理",
-                className: "RB软工互182"
-            },
-            {
-                classInfo: "Java程序设计",
-                className: "RB软工数182"
-            },
-            {
-                classInfo: "算法分析与设计",
-                className: "RB软工数182"
-            },
-            {
-                classInfo: "计算机组成原理",
-                className: "RB软工互182"
-            },
-            {
-                classInfo: "Java程序设计",
-                className: "RB软工数182"
-            },
-            {
-                classInfo: "算法分析与设计",
-                className: "RB软工数182"
-            },
-            {
-                classInfo: "计算机组成原理",
-                className: "RB软工互182"
-            },
-            {
-                classInfo: "Java程序设计",
-                className: "RB软工数182"
-            },
-        ],
+        classList: [],
         //节流阀
-        isLoading: false
+        isLoading: false,
+        //请求目标开始页数
+        pageNumber: 1,
     },
 
+    
     changeLogin() {
+        
         this.setData({
+            
             isLogin: "true"
         })
     },
@@ -82,33 +40,21 @@ Page({
 
 
     getClass() {
+        //若没有登录，拒绝请求数据
+        if(this.isLogin){
+            wx.showToast({
+              title: '请先登录',
+              duration: 1500,
+              icon: 'error',
+            })
+            return
+        }
         this.setData({
-            //正在加载
-            isLoading: true
+            //开始加载
+            isloading: true
         })
-        wx.showLoading({
-            title: '加载中...',
-        })
-
-        wx.request({
-            url: 'url',
-            method: getApp,
-            sucess: ({
-                data: res
-            }) => {
-                this.setData({
-                    classList: [...this.data.classList, ...res.data]
-                })
-            },
-            complete: () => {
-                wx.hideLoading({})
-                this.setData({
-                    //关闭节流阀
-                    isLoading: false
-                })
-            }
-
-        })
+        const token = wx.getStorageSync('token')
+        const url = "/course/list/" + this.data.pageNumber + "/8"
 
     },
 

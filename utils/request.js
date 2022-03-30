@@ -2,6 +2,9 @@ const BASE_URL = "http://124.222.177.142:8082/api/v1/tc"
 
 class MyRequest {
   request(url, method, params,header) {
+    // wx.showLoading({
+    //   title: '加载中',
+    // })
     return new Promise((resolve, reject) => {
       wx.request({
         url: BASE_URL + url,
@@ -11,7 +14,14 @@ class MyRequest {
         success: function(res) {
           resolve(res.data)
         },
-        fail: reject
+        fail(error){
+          wx.showToast({
+            title: '加载失败',
+            duration:1500,
+            icon:'error'
+          })
+        },
+        
       })
     })
   }

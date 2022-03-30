@@ -5,26 +5,36 @@
 
 <van-search value="{{ value }}" placeholder="请输入搜索关键词" bind:change="onChange" bind:search="onSearch" />
 
-<t-button class="addBtn" theme="primary" size="large" icon="add" shape="circle" bindtap="showPopup"></t-button>
+
+
+<!-- 判断登录状态 -->
+<view wx:if="{{ isLogin }}">
+
+    <t-button class="addBtn" theme="primary" size="large" icon="add" shape="circle" bindtap="showPopup"></t-button>
+
+</view>
+
+
 
 
 <view class="cell">
     <t-cell wx:for="{{classList}}" hover="true" title="{{item.name}}" description="暂定" align="top" t-class-image="title-image-large" image="/icons/classphoto.png" url="/pages/myClassInfo/myClassInfo" />
 </view>
+
 <!-- 添加班级弹窗 -->
-
-
-
 <van-popup show="{{  showAddClass }}" position="center" bind:close="onClose" round closeable="true" custom-style="height: 70%">
 
 
     <view class="continer">
 
         <van-cell-group>
-            <van-field model:value="{{ className }}" placeholder="请输入班级名称"  clickable="true" required="true" bind:change="onChange" />
-            <van-field model:value="{{ classRoom }}" placeholder="请输入教室" clickable="true" bind:change="onChange" />
+            <van-field model:value="{{ className }}" placeholder="请输入班级名称" clickable="true" required="true" bind:change="onChange" />
+            <!-- <van-field model:value="{{ classRoom }}" placeholder="请输入教室" clickable="true" bind:change="onChange" /> -->
         </van-cell-group>
 
+        <view class="confirmBtn">
+            <van-button type="default" round color="#216BCB" bindtap="addClass">添加班级</van-button>
+        </view>
 
 
     </view>

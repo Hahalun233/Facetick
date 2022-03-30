@@ -11,11 +11,15 @@ right: 20px;
 z-index: 5;
 }
 
-.cell{
-    margin-bottom: 150rpx;
-}
+
 
 .continer{
     width: 550rpx;
     padding-top: 80rpx;
+    margin: 10rpx;
+    
+}
+.confirmBtn{
+    text-align: center;
+    margin-top: 100rpx;
 }
