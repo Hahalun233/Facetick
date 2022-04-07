@@ -39,7 +39,9 @@ Component({
 
 
     onGetUserInfo() {
-
+      wx.showLoading({
+        title: '正在登陆',
+      })
       wx.login({
         timeout: 3000,
         success: login_res => {
@@ -47,7 +49,7 @@ Component({
           myrequest.post("/login", {
             code: login_res.code, //临时登录凭证
             
-          }, {
+          },{
             'content-type': 'application/x-www-form-urlencoded'
           }).then(hres => {
             if (hres.code == 200) {
@@ -55,7 +57,16 @@ Component({
               wx.setStorageSync('token', hres.data.token);
             } else {
               console.log('服务器异常');
+              wx.showToast({
+                title: '登录失败',
+                duration: 1500,
+              })
             }
+            
+            wx.showToast({
+              title: '登录成功',
+              duration: 1500,
+            })
           })
         },
         fail: res => {
@@ -65,10 +76,7 @@ Component({
 
 
       this.onClose()
-      wx.showToast({
-        title: '登录成功',
-        duration: 1500,
-      })
+     
 
     },
   }

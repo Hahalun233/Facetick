@@ -3,7 +3,8 @@
 
 <t-navbar title="Facetick" t-class-title="nav-title" />
 
-<van-search value="{{ value }}" placeholder="请输入搜索关键词" bind:change="onChange" bind:search="onSearch" />
+<van-search value="{{ value }}" placeholder="请输入搜索关键词"   bind:search="onSearch"
+  bind:cancel="onCancel"  bind:change="onChangeSearch" />
 
 
 
@@ -16,10 +17,12 @@
 
 
 
+<!-- 班级列表 -->
 
-<view class="cell">
-    <t-cell wx:for="{{classList}}" hover="true" title="{{item.name}}" description="暂定" align="top" t-class-image="title-image-large" image="/icons/classphoto.png" url="/pages/myClassInfo/myClassInfo" />
-</view>
+
+<t-cell class="cell" wx:for="{{classList}}" hover="true" title="{{item.name}}" description="{{item.id}}" align="top" t-class-image="title-image-large" image="/icons/classphoto.png" url="../myClassInfo/myClassInfo?classId={{item.id}}&className={{item.name}}"/>
+
+
 
 <!-- 添加班级弹窗 -->
 <van-popup show="{{  showAddClass }}" position="center" bind:close="onClose" round closeable="true" custom-style="height: 70%">

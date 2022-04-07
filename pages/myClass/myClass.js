@@ -27,11 +27,22 @@ Page({
         isLast:false,
 
     },
+
+    // selectClass(e){
+
+    //     var classNumber = e.currentTarget.dataset.name
+        
+    // },
+
+
     //弹出层功能
     showPopup() {
         this.setData({
             showAddClass: true
         });
+
+
+
     },
     onClose() {
         this.setData({
@@ -66,15 +77,15 @@ Page({
         const token = wx.getStorageSync('token')
         const url = "/course/list/" + this.data.pageNumber + "/8"
         myrequest.get(url, {}, {
-            'token': token
+            token: token
             //sucess
         }).then(res => {
 
-            console.log(res.data.courses)
+           
 
-            if(res.data.hasNext==true){
+            if(res.data.hasNext==false){
                 this.setData({
-                    isLast:true
+                    isLast : true
                 })
             }
 
@@ -87,6 +98,9 @@ Page({
                 isloading: false
             })
         })
+
+
+    
     },
 
     //刷新班级列表
@@ -103,7 +117,8 @@ Page({
 
         this.setData({
             //开始加载
-            isloading: true
+            isloading: true,
+            pageNumber: "1"
         })
         const token = wx.getStorageSync('token')
         const url = "/course/list/" + this.data.pageNumber + "/8"
@@ -112,7 +127,7 @@ Page({
             //sucess
         }).then(res => {
 
-
+          
 
             this.setData({
                 classList: res.data.courses
@@ -125,23 +140,22 @@ Page({
 
     onChange(event) {
 
-
-
-
         this.setData({
             className: event.detail
         })
-
-
-
     },
 
+
+    onChangeSearch(e) {
+        this.setData({
+          value: e.detail,
+        });
+      },
 
     addClass() {
 
 
         myrequest.post("/course/add", {
-
             name: this.data.className
         }, {
             token: wx.getStorageSync('token')
@@ -165,6 +179,8 @@ Page({
         })
 
 
+
+        //关闭弹窗
         this.onClose();
 
 
@@ -176,6 +192,10 @@ Page({
             isLogin: true
         })
     },
+
+    onSearch() {
+        Toast('搜索' + this.data.value);
+      },
 
     /**
      * 生命周期函数--监听页面加载
@@ -194,12 +214,13 @@ Page({
            
             return
         }
+        //无新数据
         if(this.data.isLast==true){
             return
         }
         this.setData({
 
-            pageNumber: this.data.pageNumber + 1,
+            pageNumber: parseInt(this.data.pageNumber) + parseInt(1),
 
         })
 
@@ -233,32 +254,22 @@ Page({
         this.refrashClass()
     },
 
-    /**
-     * 生命周期函数--监听页面隐藏
-     */
+   
     onHide: function () {
 
     },
 
-    /**
-     * 生命周期函数--监听页面卸载
-     */
     onUnload: function () {
 
     },
 
-    /**
-     * 页面相关事件处理函数--监听用户下拉动作
-     */
+   
     onPullDownRefresh: function () {
-
+        this.refrashClass();
     },
 
 
 
-    /**
-     * 用户点击右上角分享
-     */
     onShareAppMessage: function () {
 
     }

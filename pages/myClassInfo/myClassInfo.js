@@ -1,67 +1,266 @@
 // pages/myClassInfo/myClassInfo.js
+import myrequest from '../../utils/request'
+var QRcode = require('../../utils/weapp-qrcode')
+var qrcode;
+
 Page({
 
     /**
      * 页面的初始数据
      */
     data: {
+
         imageURL: "/../icons/classphoto.png",
-        studentList: [
+        studentList: [],
+        token: null,
+        //请求目标开始页数
+        pageNumber: 1,
+        showQrcode: false,
+        //二维码内容:coourseid
+        text: null,
+        // image: '',
+        className: null,
+        //发起签到弹出层
+        showAttendance: false,
+        roomName: null,
+        roomId: null,
+        missionId:null,
+        isAttentance:false,
+        //扫描二维码选择教室
+        value: null,
+        //进度条参数
+        progress: 37,
+        //tabbar
+        active: 1,
+        //已到同学名单
+        goodStudents:[
             {
-                name:"夏之恒",
-                avatarUrl:"/assets/images/avr.JPG"
+                name:"小恒恒",
+                img:"/assets/images/avr.JPG"
             },
             {
-                name:"夏只恒",
-                avatarUrl:"/assets/images/avr.JPG"
+                name:"小恒恒",
+                img:"/assets/images/avr.JPG"
             },
             {
-                name:"夏志恒",
-                avatarUrl:"/assets/images/avr.JPG"
+                name:"小恒恒",
+                img:"/assets/images/avr.JPG"
             },
             {
-                name:"夏治恒",
-                avatarUrl:"/assets/images/avr.JPG"
+                name:"小恒恒",
+                img:"/assets/images/avr.JPG"
+            }, {
+                name:"小恒恒",
+                img:"/assets/images/avr.JPG"
             },
             {
-                name:"夏之恒",
-                avatarUrl:"/assets/images/avr.JPG"
+                name:"小恒恒",
+                img:"/assets/images/avr.JPG"
+            }
+            
+        ],
+        //未到同学名单
+        badStudents:[
+            {
+                name:"坏恒恒",
+                img:"/assets/images/cinemaSelect.png"
             },
             {
-                name:"夏只恒",
-                avatarUrl:"/assets/images/avr.JPG"
+                name:"坏恒恒",
+                img:"/assets/images/cinema.png"
             },
             {
-                name:"夏志恒",
-                avatarUrl:"/assets/images/avr.JPG"
+                name:"坏恒恒",
+                img:"/assets/images/cinemaSelect.png"
             },
             {
-                name:"夏治恒",
-                avatarUrl:"/assets/images/avr.JPG"
+                name:"坏恒恒",
+                img:"/assets/images/cinema.png"
+            },{
+                name:"坏恒恒",
+                img:"/assets/images/cinemaSelect.png"
             },
             {
-                name:"夏之恒",
-                avatarUrl:"/assets/images/avr.JPG"
-            },
-            {
-                name:"夏只恒",
-                avatarUrl:"/assets/images/avr.JPG"
-            },
-            {
-                name:"夏志恒",
-                avatarUrl:"/assets/images/avr.JPG"
-            },
-            {
-                name:"夏治恒",
-                avatarUrl:"/assets/images/avr.JPG"
-            },
+                name:"坏恒恒",
+                img:"/assets/images/cinema.png"
+            }
         ]
+
+
     },
+
+
+    //获得学生列表
+    getStudent() {
+        this.setData({
+            //开始加载
+            isloading: true
+        })
+        const token = wx.getStorageSync('token')
+        const url = "/student/list/courseid/" + this.data.pageNumber + "/8/" + this.data.text
+
+        myrequest.get(url, {}, {
+            'token': token
+            //sucess
+        }).then(res => {
+
+            if (res.hasNextPage == false) {
+                this.setData({
+                    isLast: true
+                })
+            }
+
+            const newStudentList = this.data.studentList.concat(res.data.list)
+
+            this.setData({
+                studentList: newStudentList
+            })
+            this.setData({
+                isloading: false
+            })
+        })
+        console.log(this.data.studentList)
+    },
+
+    refrashStudent() {
+
+
+        this.setData({
+            //开始加载
+            isloading: true
+        })
+
+        const url = "/student/list/courseid/" + "1/8/" + this.data.text
+
+        myrequest.get(url, {}, {
+            'token': this.data.token
+            //sucess
+        }).then(res => {
+
+            if (res.hasNextPage == false) {
+                this.setData({
+                    isLast: true
+                })
+            }
+
+
+            this.setData({
+                studentList: res.data.list
+            })
+            this.setData({
+                isloading: false
+            })
+        })
+    },
+
+    //添加学生
+    addStudent() {
+        this.showPopup()
+        qrcode.makeCode(this.data.text)
+        this.refrashStudent()
+    },
+
+    //弹出层功能
+    showPopup() {
+        this.setData({
+            showQrcode: true
+        });
+
+
+
+    },
+
+    onClose() {
+        this.setData({
+            showQrcode: false
+        });
+
+        this.refrashStudent()
+    },
+
+
+    showAttendance() {
+        this.setData({
+            showAttendance: true
+        })
+    },
+
+    onCloseAttendance() {
+        this.setData({
+            showAttendance: false
+        })
+    },
+
+
+    //扫码获得教室
+    getRoomName() {
+        wx.scanCode({
+            success: res => {
+                console.log('roomid',res)
+                this.setData({
+                    roomId: res.result,
+                    value: null
+                })
+            }
+        })
+
+      
+
+
+    },
+
+
+    
+
+    //开始考勤
+    startAttendance() {
+        this.setData({
+            isAttentance:true
+        })
+        const url = "/mission/launch/" + this.data.text + "/" + this.data.roomId
+        myrequest.get(url, {}, {
+            token: this.data.token
+        }).then(res => {
+            this.setData({
+                missionId:res.data
+            })
+            
+        })
+    },
+
+    //结束考勤
+    endAttentence() {
+        this.setData({
+            isAttentance:false
+        })
+    },
+
+    onChangeTabbar(event) {
+        // event.detail 的值为当前选中项的索引
+        this.setData({ active: event.detail });
+      },
+
 
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+        this.setData({
+            token: wx.getStorageSync('token'),
+            text: options.classId,
+            className: options.className,
+            value: '扫描教授机客户端二维码选择教室',
+        })
+        this.getStudent();
+        qrcode = new QRcode('canvas', {
+            text: this.data.classId,
+            image: '/assets/images/logo.png',
+            width: 150,
+            height: 150,
+            colorDark: "#1CA4FC",
+            colorLight: "white",
+            // correctLevel: QRCode.CorrectLevel.H,
+        })
 
     },
 
@@ -76,7 +275,7 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
-
+        this.refrashStudent()
     },
 
     /**
@@ -97,7 +296,7 @@ Page({
      * 页面相关事件处理函数--监听用户下拉动作
      */
     onPullDownRefresh: function () {
-
+        this.refrashStudent();
     },
 
     /**
@@ -105,6 +304,21 @@ Page({
      */
     onReachBottom: function () {
 
+        if (this.data.isloading) {
+
+            return
+        }
+        //无新数据
+        if (this.isLastPage == true) {
+            return
+        }
+        this.setData({
+
+            pageNumber: parseInt(this.data.pageNumber) + parseInt(1),
+
+        })
+
+        this.getStudent()
     },
 
     /**

@@ -1,79 +1,74 @@
 {
-  "pages": [
-    "pages/history/history",
-    "pages/historyInfo/historyInfo",
-    "pages/myClass/myClass",
-    "pages/home/home",
-    "pages/newClass/newClass",
-    "pages/search/search",
-    "pages/myClassInfo/myClassInfo",
-    
-    
-    "components/login-pop/login-pop"
-  ],
-  "usingComponents": {
-
-    "login-pop":"/components/login-pop/login-pop",
-
-
-
-    "t-tab-bar": "tdesign-miniprogram/tab-bar/tab-bar",
-    "t-tab-bar-item": "tdesign-miniprogram/tab-bar/tab-bar-item",
-    "t-navbar": "tdesign-miniprogram/navbar/navbar",
-    "t-cell": "tdesign-miniprogram/cell/cell",
-    "t-swiper": "tdesign-miniprogram/swiper/swiper",
-    "t-swiper-item": "tdesign-miniprogram/swiper/swiper-item",
-    "t-swiper-nav": "tdesign-miniprogram/swiper/swiper-nav",
-    "t-button": "tdesign-miniprogram/button/button",
-    "t-avatar": "tdesign-miniprogram/avatar/avatar",
-    "t-avatar-group": "tdesign-miniprogram/avatar/avatar-group",
-    "t-search": "tdesign-miniprogram/search/search",
-    "van-search": "@vant/weapp/search/index",
-    "van-cell": "@vant/weapp/cell/index",
-    "van-cell-group": "@vant/weapp/cell-group/index",
-    "van-card": "@vant/weapp/card/index",
-    "van-button": "@vant/weapp/button/index",
-    "van-row": "@vant/weapp/row/index",
-    "van-col": "@vant/weapp/col/index",
-    "van-divider": "@vant/weapp/divider/index",
-    "van-grid": "@vant/weapp/grid/index",
-    "van-grid-item": "@vant/weapp/grid-item/index",
-    "van-image": "@vant/weapp/image/index",
-    "van-popup": "@vant/weapp/popup/index",
-    "van-field": "@vant/weapp/field/index"
-  },
-  "window": {
-    "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "Weixin",
-    "navigationBarTextStyle": "black",
-    "navigationStyle": "custom"
-  },
-  "sitemapLocation": "sitemap.json",
-  "tabBar": {
-    "borderStyle": "white",
-    "color": "#010101",
-    "selectedColor": "#216BCB",
-    "list": [{
-        "pagePath": "pages/history/history",
-        "text": "历史",
-        "iconPath": "/icons/history.png",
-        "selectedIconPath": "/icons/history-selected.png"
-      },
-      {
-        "pagePath": "pages/myClass/myClass",
-        "text": "班级",
-        "iconPath": "/icons/class-selected.png",
-        "selectedIconPath": "/icons/class.png"
-      },
-      {
-        "pagePath": "pages/home/home",
-        "text": "我的",
-        "iconPath": "/icons/home.png",
-        "selectedIconPath": "/icons/home-selected.png"
-      }
+    "pages": [
+        "pages/history/history",
+        "pages/historyInfo/historyInfo",
+        "pages/myClass/myClass",
+        "pages/home/home",
+        "pages/myClassInfo/myClassInfo",
+        "components/login-pop/login-pop"
     ],
+    "usingComponents": {
+        "login-pop": "/components/login-pop/login-pop",
+        "t-tab-bar": "tdesign-miniprogram/tab-bar/tab-bar",
+        "t-tab-bar-item": "tdesign-miniprogram/tab-bar/tab-bar-item",
+        "t-navbar": "tdesign-miniprogram/navbar/navbar",
+        "t-cell": "tdesign-miniprogram/cell/cell",
+        "t-swiper": "tdesign-miniprogram/swiper/swiper",
+        "t-swiper-item": "tdesign-miniprogram/swiper/swiper-item",
+        "t-swiper-nav": "tdesign-miniprogram/swiper/swiper-nav",
+        "t-button": "tdesign-miniprogram/button/button",
+        "t-avatar": "tdesign-miniprogram/avatar/avatar",
+        "t-avatar-group": "tdesign-miniprogram/avatar/avatar-group",
+        "t-search": "tdesign-miniprogram/search/search",
+        "van-search": "@vant/weapp/search/index",
+        "van-cell": "@vant/weapp/cell/index",
+        "van-cell-group": "@vant/weapp/cell-group/index",
+        "van-card": "@vant/weapp/card/index",
+        "van-button": "@vant/weapp/button/index",
+        "van-row": "@vant/weapp/row/index",
+        "van-col": "@vant/weapp/col/index",
+        "van-divider": "@vant/weapp/divider/index",
+        "van-grid": "@vant/weapp/grid/index",
+        "van-grid-item": "@vant/weapp/grid-item/index",
+        "van-image": "@vant/weapp/image/index",
+        "van-popup": "@vant/weapp/popup/index",
+        "van-field": "@vant/weapp/field/index",
+        "van-progress": "@vant/weapp/progress/index",
+        "van-tab": "@vant/weapp/tab/index",
+        "van-tabs": "@vant/weapp/tabs/index"
+    },
+    "window": {
+        "backgroundTextStyle": "light",
+        "navigationBarBackgroundColor": "#fff",
+        "navigationBarTitleText": "Weixin",
+        "navigationBarTextStyle": "black",
+        "navigationStyle": "custom"
+    },
     "sitemapLocation": "sitemap.json",
-    "lazyCodeLoading": "requiredComponents"
-  }
+    "tabBar": {
+        "borderStyle": "white",
+        "color": "#010101",
+        "selectedColor": "#216BCB",
+        "list": [{
+                "pagePath": "pages/history/history",
+                "text": "历史",
+                "iconPath": "/icons/history.png",
+                "selectedIconPath": "/icons/history-selected.png"
+            },
+            {
+                "pagePath": "pages/myClass/myClass",
+                "text": "班级",
+                "iconPath": "/icons/class-selected.png",
+                "selectedIconPath": "/icons/class.png"
+            },
+            {
+                "pagePath": "pages/home/home",
+                "text": "我的",
+                "iconPath": "/icons/home.png",
+                "selectedIconPath": "/icons/home-selected.png"
+            }
+        ],
+        "sitemapLocation": "sitemap.json",
+        "lazyCodeLoading": "requiredComponents"
+    }
 }

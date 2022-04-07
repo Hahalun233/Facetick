@@ -7,7 +7,7 @@ Page({
 
     data: {
         //判断登录状态
-        isLogin:false,
+        isLogin: false,
         //搜索内容
         value: '',
         //班级列表
@@ -23,7 +23,7 @@ Page({
         
         this.setData({
             
-            isLogin: "true"
+            isLogin: true
         })
     },
 

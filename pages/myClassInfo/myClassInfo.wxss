@@ -19,4 +19,36 @@
 .name{
     padding-top: 50rpx;
 }
+.continer{
+    text-align: center;
+    width: 550rpx;
+    padding-top: 80rpx;
+    margin: 10rpx;
+}
+.canvas{
+    margin-top: 160rpx;
+    margin-left: 130rpx;
+    width: 150px;
+    height: 150px;
+}
+text{
+padding: 90rpx;
+}
 
+.attendenceContiner{
+    width: 550rpx;
+    padding-top: 80rpx;
+}
+
+.attendanceBtn{
+    margin-top: 50rpx;
+    margin-left: 190rpx;
+}
+.attendancePanel{
+ 
+}
+.progress{
+   margin-left: 80rpx;
+   margin-right: 80rpx;
+  margin-bottom: 10rpx;
+}

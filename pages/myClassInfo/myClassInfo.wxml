@@ -1,19 +1,22 @@
 <!--pages/myClassInfo/myClassInfo.wxml-->
 <t-navbar title="班级信息" leftIcon="chevron-left" homeIcon="home" bindgohome="onGoHome" t-class-left-icon="left-icon-back" t-class-home-icon="home-icon" t-class-title="nav-title" />
+
+
+
 <van-row>
   <van-col span="16">
-    <van-card desc="RB软工互183，184" title="算法设计与分析" thumb="{{ imageURL }}">
+    <van-card desc="{{className}}" title="" thumb="{{ imageURL }}">
     </van-card>
   </van-col>
   <van-col span="8">
     <view class="buttonContiner">
       <van-col>
         <van-row span="8">
-          <van-button round type="info">发起签到</van-button>
+          <van-button round type="info" bindtap="showAttendance">发起签到</van-button>
         </van-row>
         <view class="addContiner">
           <van-row span="8">
-            <van-button round type="info">添加学生</van-button>
+            <van-button round type="info" bindtap="addStudent">添加学生</van-button>
           </van-row>
         </view>
       </van-col>
@@ -34,7 +37,7 @@
 
   <van-row>
     <van-col span="4" offset="3">
-      <van-image radius="15px" width="5rem" height="5rem" src="/assets/images/avr.JPG" />
+      <van-image radius="15px" width="5rem" height="5rem" src="{{item.img}}" />
     </van-col>
 
     <view class="name">
@@ -51,6 +54,125 @@
 
 
 
+
+
+<!-- 发起签到弹窗 -->
+<van-popup show="{{  showAttendance}}" position="center" bind:close="onCloseAttendance" round closeable="true" custom-style="height: 70%">
+
+
+
+
+  <view class="attendenceContiner">
+
+
+
+    <van-cell-group>
+      <van-cell title='{{roomId}}' bind:click="getRoomName" icon="scan" value='{{value}}' />
+    </van-cell-group>
+
+
+    <view class="attendancePanel" wx:if="{{ !isAttendance }}">
+      <!-- 考勤进度条 -->
+      <view class="progress">
+        <van-progress percentage="{{progress}}" stroke-width="8" />
+      </view>
+
+      <van-tabs active="a" color="#216BCB" wx:if="{{showAttendance}}">
+        <van-tab title="已到" name="a">
+
+          <scroll-view scroll-y style="height: 500rpx;">
+            <view wx:for="{{goodStudents}}">
+
+              <van-row>
+                <van-col span="3" offset="2">
+                  <van-image radius="15px" width="5rem" height="5rem" src="{{item.img}}" />
+                </van-col>
+
+                <view class="name">
+                  <van-col span="12" offset="7">
+                    <van-cell-group inset>
+                      <van-cell title="{{item.name}}" center="true" />
+                    </van-cell-group>
+                  </van-col>
+                </view>
+
+              </van-row>
+            </view>
+          </scroll-view>
+        
+
+        </van-tab>
+
+
+        <van-tab title="未到" name="b">
+          <!-- 未到同学名单 -->
+          <scroll-view scroll-y style="height: 500rpx;">
+            <view wx:for="{{badStudents}}">
+
+              <van-row>
+                <van-col span="3" offset="2">
+                  <van-image radius="15px" width="5rem" height="5rem" src="{{item.img}}" />
+                </van-col>
+
+                <view class="name">
+                  <van-col span="12" offset="7">
+                    <van-cell-group inset>
+                      <van-cell title="{{item.name}}" center="true" />
+                    </van-cell-group>
+                  </van-col>
+                </view>
+
+              </van-row>
+            </view>
+          </scroll-view>
+        </van-tab>
+      </van-tabs>
+
+
+    </view>
+
+
+  </view>
+
+
+
+
+  <view class="attendanceBtn">
+    <van-col>
+      <van-row>
+        <van-button wx:if="{{ !isAttendance }}" type="info" bindtap="startAttendance">开始考勤</van-button>
+      </van-row>
+      <van-row>
+        <van-button wx:if="{{ isAttendance }}" type="info">结束考勤</van-button>
+      </van-row>
+    </van-col>
+  </view>
+
+
+
+
+
+
+
+</van-popup>
+
+
+
+<!-- 二维码弹窗-->
+<van-popup show="{{  showQrcode }}" position="center" bind:close="onClose" round closeable="true" custom-style="height: 70%">
+
+
+  <view class="attendenceContiner">
+
+
+    <text>使用Facetick学生端</text>
+    <text>扫描该二维码以加入班级</text>
+  </view>
+  <canvas style="width: 200px; height: 200px;" canvas-id="canvas" class="canvas"></canvas>
+
+
+
+</van-popup>
 
 
 

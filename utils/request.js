@@ -1,10 +1,10 @@
-const BASE_URL = "http://124.222.177.142:8082/api/v1/tc"
-
+// const BASE_URL = "http://124.222.177.142:8082/api/v1/tc"
+const BASE_URL = "http://192.168.43.188:8082/api/v1/tc"
 class MyRequest {
   request(url, method, params,header) {
-    // wx.showLoading({
-    //   title: '加载中',
-    // })
+    wx.showLoading({
+      title: '加载中',
+    })
     return new Promise((resolve, reject) => {
       wx.request({
         url: BASE_URL + url,
@@ -12,7 +12,10 @@ class MyRequest {
         data: params,
         header:header,
         success: function(res) {
+          wx.hideLoading({
+          })
           resolve(res.data)
+
         },
         fail(error){
           wx.showToast({
