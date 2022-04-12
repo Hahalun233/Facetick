@@ -26,11 +26,13 @@
 
 
 
+<view class="bar">
+  <van-grid direction="horizontal" column-num="2">
+    <van-grid-item text="头像" />
+    <van-grid-item text="姓名" />
+  </van-grid>
 
-<van-grid direction="horizontal" column-num="2">
-  <van-grid-item text="头像" />
-  <van-grid-item text="姓名" />
-</van-grid>
+</view>
 
 
 <view wx:for="{{studentList}}">
@@ -99,7 +101,7 @@
               </van-row>
             </view>
           </scroll-view>
-        
+
 
         </van-tab>
 
@@ -140,10 +142,10 @@
   <view class="attendanceBtn">
     <van-col>
       <van-row>
-        <van-button wx:if="{{ !isAttendance }}" type="info" bindtap="startAttendance">开始考勤</van-button>
+        <van-button  type="info" bindtap="startAttendance">开始考勤</van-button>
       </van-row>
       <van-row>
-        <van-button wx:if="{{ isAttendance }}" type="info">结束考勤</van-button>
+        <van-button  type="info" bindtap="pause">结束考勤</van-button>
       </van-row>
     </van-col>
   </view>

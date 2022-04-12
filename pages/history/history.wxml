@@ -8,6 +8,8 @@
 <van-search value="{{ value }}" placeholder="请输入搜索关键词" bind:change="onChange" bind:search="onSearch" />
 
 
+<button>发通知</button>
+
 
 <t-cell class="cell" wx:for="{{classList}}" hover="true" title="{{item.classInfo}}" description="{{item.className}}" align="top" t-class-image="title-image-large" image="/icons/classphoto.png" url="/pages/historyInfo/historyInfo" />
 

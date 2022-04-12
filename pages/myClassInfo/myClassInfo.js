@@ -1,5 +1,6 @@
 // pages/myClassInfo/myClassInfo.js
 import myrequest from '../../utils/request'
+
 var QRcode = require('../../utils/weapp-qrcode')
 var qrcode;
 
@@ -9,8 +10,9 @@ Page({
      * 页面的初始数据
      */
     data: {
-
-        imageURL: "/../icons/classphoto.png",
+        //定时器
+        time: '0',
+        imageURL: "/icons/classphoto.png",
         studentList: [],
         token: null,
         //请求目标开始页数
@@ -24,8 +26,9 @@ Page({
         showAttendance: false,
         roomName: null,
         roomId: null,
-        missionId:null,
-        isAttentance:false,
+        missionId: null,
+        //是否正在考勤
+        isAttentance: false,
         //扫描二维码选择教室
         value: null,
         //进度条参数
@@ -33,61 +36,29 @@ Page({
         //tabbar
         active: 1,
         //已到同学名单
-        goodStudents:[
-            {
-                name:"小恒恒",
-                img:"/assets/images/avr.JPG"
-            },
-            {
-                name:"小恒恒",
-                img:"/assets/images/avr.JPG"
-            },
-            {
-                name:"小恒恒",
-                img:"/assets/images/avr.JPG"
-            },
-            {
-                name:"小恒恒",
-                img:"/assets/images/avr.JPG"
-            }, {
-                name:"小恒恒",
-                img:"/assets/images/avr.JPG"
-            },
-            {
-                name:"小恒恒",
-                img:"/assets/images/avr.JPG"
-            }
-            
+        goodStudents: [
+
         ],
         //未到同学名单
-        badStudents:[
-            {
-                name:"坏恒恒",
-                img:"/assets/images/cinemaSelect.png"
-            },
-            {
-                name:"坏恒恒",
-                img:"/assets/images/cinema.png"
-            },
-            {
-                name:"坏恒恒",
-                img:"/assets/images/cinemaSelect.png"
-            },
-            {
-                name:"坏恒恒",
-                img:"/assets/images/cinema.png"
-            },{
-                name:"坏恒恒",
-                img:"/assets/images/cinemaSelect.png"
-            },
-            {
-                name:"坏恒恒",
-                img:"/assets/images/cinema.png"
-            }
+        badStudents: [
         ]
 
 
     },
+
+    //定时器
+    start: function () {
+        console.log("start")
+        startTimer(this)
+    },
+    pause: function () {
+        console.log("pause")
+        stopTime()
+    },
+
+
+
+
 
 
     //获得学生列表
@@ -110,10 +81,10 @@ Page({
                 })
             }
 
-            const newStudentList = this.data.studentList.concat(res.data.list)
+            // const newStudentList = this.data.studentList.concat(res.data.list)
 
             this.setData({
-                studentList: newStudentList
+                studentList: res.data.list
             })
             this.setData({
                 isloading: false
@@ -142,7 +113,6 @@ Page({
                     isLast: true
                 })
             }
-
 
             this.setData({
                 studentList: res.data.list
@@ -194,9 +164,10 @@ Page({
 
     //扫码获得教室
     getRoomName() {
+       
         wx.scanCode({
             success: res => {
-                console.log('roomid',res)
+                console.log('roomid', res)
                 this.setData({
                     roomId: res.result,
                     value: null
@@ -204,41 +175,51 @@ Page({
             }
         })
 
-      
-
-
     },
 
 
-    
+
 
     //开始考勤
     startAttendance() {
+        if(this.data.roomId==null){
+            wx.showToast({
+              title: '请先选择教室',
+              icon:'error'
+            })
+            return
+        }
+        
         this.setData({
-            isAttentance:true
+            isAttentance: true
         })
         const url = "/mission/launch/" + this.data.text + "/" + this.data.roomId
         myrequest.get(url, {}, {
             token: this.data.token
         }).then(res => {
             this.setData({
-                missionId:res.data
+                missionId: res.data
             })
-            
+
         })
+
+        //刷新考勤信息
+        // this.start
     },
 
     //结束考勤
     endAttentence() {
         this.setData({
-            isAttentance:false
+            isAttentance: false
         })
     },
 
     onChangeTabbar(event) {
         // event.detail 的值为当前选中项的索引
-        this.setData({ active: event.detail });
-      },
+        this.setData({
+            active: event.detail
+        });
+    },
 
 
     /**
@@ -328,3 +309,34 @@ Page({
 
     }
 })
+
+
+var time = 1;
+var timer;
+//开启定时器
+function startTimer(that) {
+    timer = setTimeout(function () {
+        console.log("time:",time);
+        time++;
+        // wx.request({
+        //   url: 'url',
+        //   method: '',
+        //   hearder:{},
+        //   data:{},
+        //   success: function (res) {
+        //       console.log(res)
+        //       that.setData({
+
+        //       })
+        //       startTimer(that)
+        //   }
+        // })
+        startTimer(that)
+    },1000);
+};
+
+function stopTime() {
+    if(timer!=null){
+        clearTimeout(timer)
+    }
+}

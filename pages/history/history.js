@@ -6,6 +6,11 @@ Page({
 
 
     data: {
+
+        //test
+        
+
+
         //判断登录状态
         isLogin: false,
         //搜索内容

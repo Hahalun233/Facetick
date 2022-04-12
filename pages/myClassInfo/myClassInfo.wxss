@@ -52,3 +52,6 @@ padding: 90rpx;
    margin-right: 80rpx;
   margin-bottom: 10rpx;
 }
+.bar{
+    margin-top: 10rpx;
+}
