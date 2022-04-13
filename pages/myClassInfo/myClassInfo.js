@@ -36,12 +36,9 @@ Page({
         //tabbar
         active: 1,
         //已到同学名单
-        goodStudents: [
-
-        ],
+        goodStudents: [],
         //未到同学名单
-        badStudents: [
-        ]
+        badStudents: []
 
 
     },
@@ -90,7 +87,7 @@ Page({
                 isloading: false
             })
         })
-        console.log(this.data.studentList)
+       
     },
 
     refrashStudent() {
@@ -163,49 +160,56 @@ Page({
 
 
     //扫码获得教室
-    getRoomName() {
-       
-        wx.scanCode({
-            success: res => {
-                console.log('roomid', res)
-                this.setData({
-                    roomId: res.result,
-                    value: null
-                })
-            }
+    // getRoomName() {
+
+    //     wx.scanCode({
+    //         success: res => {
+    //             console.log('roomid', res)
+    //             this.setData({
+    //                 roomId: res.result,
+    //                 value: null
+    //             })
+    //         }
+    //     })
+
+    // },
+
+
+    //跳转至签到界面
+    toAttendancePage() {
+        
+        wx.redirectTo({
+            url: '/pages/Attendance/Attendance?courseId=' + this.data.text,
         })
-
     },
-
-
 
 
     //开始考勤
-    startAttendance() {
-        if(this.data.roomId==null){
-            wx.showToast({
-              title: '请先选择教室',
-              icon:'error'
-            })
-            return
-        }
-        
-        this.setData({
-            isAttentance: true
-        })
-        const url = "/mission/launch/" + this.data.text + "/" + this.data.roomId
-        myrequest.get(url, {}, {
-            token: this.data.token
-        }).then(res => {
-            this.setData({
-                missionId: res.data
-            })
+    // startAttendance() {
+    //     if(this.data.roomId==null){
+    //         wx.showToast({
+    //           title: '请先选择教室',
+    //           icon:'error'
+    //         })
+    //         return
+    //     }
 
-        })
+    //     this.setData({
+    //         isAttentance: true
+    //     })
+    //     const url = "/mission/launch/" + this.data.text + "/" + this.data.roomId
+    //     myrequest.get(url, {}, {
+    //         token: this.data.token
+    //     }).then(res => {
+    //         this.setData({
+    //             missionId: res.data
+    //         })
 
-        //刷新考勤信息
-        // this.start
-    },
+    //     })
+
+    //     //刷新考勤信息
+    //     // this.start
+    // },
 
     //结束考勤
     endAttentence() {
@@ -230,7 +234,7 @@ Page({
             token: wx.getStorageSync('token'),
             text: options.classId,
             className: options.className,
-            value: '扫描教授机客户端二维码选择教室',
+            // value: '扫描教授机客户端二维码选择教室',
         })
         this.getStudent();
         qrcode = new QRcode('canvas', {
@@ -316,7 +320,7 @@ var timer;
 //开启定时器
 function startTimer(that) {
     timer = setTimeout(function () {
-        console.log("time:",time);
+        console.log("time:", time);
         time++;
         // wx.request({
         //   url: 'url',
@@ -332,11 +336,11 @@ function startTimer(that) {
         //   }
         // })
         startTimer(that)
-    },1000);
+    }, 1000);
 };
 
 function stopTime() {
-    if(timer!=null){
+    if (timer != null) {
         clearTimeout(timer)
     }
 }

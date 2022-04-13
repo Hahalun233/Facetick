@@ -12,7 +12,7 @@
     <view class="buttonContiner">
       <van-col>
         <van-row span="8">
-          <van-button round type="info" bindtap="showAttendance">发起签到</van-button>
+          <van-button  round type="info"    bindtap="toAttendancePage">发起签到</van-button>
         </van-row>
         <view class="addContiner">
           <van-row span="8">

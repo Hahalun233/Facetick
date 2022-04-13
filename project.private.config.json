@@ -35,6 +35,12 @@
                     "pathName": "pages/myClass/myClass",
                     "query": "",
                     "scene": null
+                },
+                {
+                    "name": "Attendance",
+                    "pathName": "pages/Attendance/Attendance",
+                    "query": "",
+                    "scene": null
                 }
             ]
         }

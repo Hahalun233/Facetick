@@ -1,0 +1,90 @@
+<!--pages/myClassInfo/myClassInfo.wxml-->
+<t-navbar title="班级考勤" leftIcon="chevron-left" homeIcon="home" bindgohome="onGoHome" t-class-left-icon="left-icon-back" t-class-home-icon="home-icon" t-class-title="nav-title" />
+
+
+
+
+
+<van-cell-group>
+    <van-cell title='{{roomId}}' bind:click="getRoomName" icon="scan" label='{{value}}' />
+</van-cell-group>
+
+
+<van-row>
+    <van-col span="16">
+        <van-card desc="{{roomId}}" title="" thumb="{{ imageURL }}">
+        </van-card>
+    </van-col>
+    <van-col span="8">
+        <view class="buttonContiner">
+            <van-col>
+                <van-row span="8">
+                    <van-button round type="info" bindtap="startAttendance">开始考勤</van-button>
+                </van-row>
+                <view class="addContiner">
+                    <van-row span="8">
+                        <van-button round type="info" bindtap="stopAttendence">停止考勤</van-button>
+                    </van-row>
+                </view>
+            </van-col>
+        </view>
+    </van-col>
+</van-row>
+
+<!-- 考勤进度条 -->
+<view class="progress">
+    <van-progress percentage="{{progress}}" stroke-width="8" />
+</view>
+
+
+
+<van-tabs active="a" color="#216BCB" >
+    <van-tab title="已到" name="a">
+
+        <scroll-view scroll-y style="height: 750rpx;">
+            <view wx:for="{{goodStudents}}">
+
+                <van-row>
+                    <van-col span="3" offset="2">
+                        <van-image radius="15px" width="5rem" height="5rem" src="{{item.img}}" />
+                    </van-col>
+
+                    <view class="name">
+                        <van-col span="12" offset="7">
+                            <van-cell-group inset>
+                                <van-cell title="{{item.name}}" center="true" />
+                            </van-cell-group>
+                        </van-col>
+                    </view>
+
+                </van-row>
+            </view>
+        </scroll-view>
+
+
+    </van-tab>
+
+
+    <van-tab title="未到" name="b">
+        <!-- 未到同学名单 -->
+        <scroll-view scroll-y style="height: 750rpx;">
+            <view wx:for="{{badStudents}}">
+
+                <van-row>
+                    <van-col span="3" offset="2">
+                        <van-image radius="15px" width="5rem" height="5rem" src="{{item.img}}" />
+                    </van-col>
+
+                    <view class="name">
+                        <van-col span="12" offset="7">
+                            <van-cell-group inset>
+                                <van-cell title="{{item.name}}" center="true" />
+                            </van-cell-group>
+                        </van-col>
+                    </view>
+
+                </van-row>
+            </view>
+        </scroll-view>
+    </van-tab>
+</van-tabs>

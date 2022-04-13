@@ -5,7 +5,9 @@
         "pages/myClass/myClass",
         "pages/home/home",
         "pages/myClassInfo/myClassInfo",
+        "pages/Attendance/Attendance",
         "components/login-pop/login-pop"
+
     ],
     "usingComponents": {
         "login-pop": "/components/login-pop/login-pop",
