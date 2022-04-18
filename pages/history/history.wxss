@@ -9,3 +9,9 @@
     color: rgb(255, 0, 0);
 }
 
+.btn{
+    margin-top: 50rpx;
+}
+.desc{
+    margin-top: 50rpx;
+}

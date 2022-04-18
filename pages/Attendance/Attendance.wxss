@@ -51,7 +51,7 @@ text {
     margin-left: 190rpx;
 }
 
-.attendancePanel {}
+
 
 .progress {
     margin-left: 80rpx;

@@ -17,14 +17,18 @@ Page({
         //考勤id
         missionId: null,
         //进度条参数
-        progress: 47.564,
+        progress: 0,
         courseId: null,
         value: null,
         token: null,
         //已到同学名单
         goodStudents: [],
         //未到同学名单
-        badStudents: []
+        badStudents: [],
+        //是否正在考勤
+        isAttentance: false,
+        //重新加载标志
+
     },
 
     //定时器
@@ -47,6 +51,16 @@ Page({
 
     stopAttendence() {
 
+        if (this.data.isAttentance == false) {
+            wx.showToast({
+                title: '请先开始考勤',
+                icon: 'error'
+            })
+
+            return
+        }
+
+wx.setStorageSync('missionId', )
         //清除计时器  即清除setInter
         clearInterval(this.data.setInter)
         //通知服务器停止
@@ -58,11 +72,13 @@ Page({
         }, {
             token: this.data.token
         }).then(res => {
-            if (res.data == "200") {
-                wx.showToast({
-                    title: '考勤已停止',
-                })
-            }
+            this.setData({
+                isAttentance: false
+            })
+            wx.showToast({
+                title: '考勤已停止',
+            })
+            
         })
     },
 
@@ -70,6 +86,14 @@ Page({
 
     //开始考勤
     startAttendance() {
+
+        if (this.data.isAttentance == true) {
+            wx.showToast({
+                title: '考勤正在进行',
+                icon:'error'
+            })
+            return
+        }
         if (this.data.roomId == null) {
             wx.showToast({
                 title: '请先选择教室',
@@ -77,10 +101,6 @@ Page({
             })
             return
         }
-        this.setData({
-            isAttentance: true
-        })
-
 
 
 
@@ -93,9 +113,13 @@ Page({
         }).then(res => {
 
             this.setData({
-                missionId: res.data
-            })
+                isAttentance: true,
+                missionId: res.data,
 
+            })
+            //将考勤任务id缓存，用于退出再返回改界面时继续任务
+            wx.setStorageSync('missionId',this.data.missionId)
+            wx.setStorageSync('roomId',this.data.roomId)
             //获得考勤结果
             var url = '/mission/status/' + this.data.missionId
             myrequest.get(url, {
@@ -117,10 +141,12 @@ Page({
                 }, {
                     token: _this.data.token
                 }).then(res => {
+                    var p = (res.data.present / res.data.total)*100
+                    console.log(p)
                     _this.setData({
-                        progress:res.data.present/res.data.present,
-                        goodStudents:res.data.presentList,
-                        badStudents:res.data.absentList,
+                        progress: p,
+                        goodStudents: res.data.presentList,
+                        badStudents: res.data.absentList,
                     })
                     console.log(res)
                 })
@@ -129,19 +155,72 @@ Page({
             }, 1000); // 一秒打印一次
 
         })
-
-
-
-        // wx.request({
-        //     url: '/mission/status/'+this.data.missionId,
-        //     method: 'GET',
-        //     hearder:{token:this.data.token},
-        //     data:{},
-        //     success: function (res) {
-        //         console.log(res)
-        //     }
-        //   })
     },
+    //继续考勤
+    reLoadAttendance() {
+        console.log("重新加载考勤")
+        this.setData({
+            isAttentance: true
+        })
+        isAttentance: true
+
+
+
+
+
+
+        //获得考勤结果
+        var url = '/mission/status/' + this.data.missionId
+        myrequest.get(url, {
+
+        }, {
+            token: this.data.token
+        }).then(res => {
+            console.log(res)
+        })
+
+        // 持续获得考勤名单
+        var _this = this
+        _this.data.setInter = setInterval(function () {
+            var url = '/mission/status/' + _this.data.missionId
+
+
+            ezrequest.get(url, {
+
+            }, {
+                token: _this.data.token
+            }).then(res => {
+                var p = (res.data.present / res.data.total)*100
+                console.log(p)
+                _this.setData({
+                    progress: p,
+                    goodStudents: res.data.presentList,
+                    badStudents: res.data.absentList,
+                })
+                
+            })
+
+            console.log('请求一次')
+        }, 1000); // 一秒打印一次
+
+
+    },
+
+
+
+
+
+
+    // wx.request({
+    //     url: '/mission/status/'+this.data.missionId,
+    //     method: 'GET',
+    //     hearder:{token:this.data.token},
+    //     data:{},
+    //     success: function (res) {
+    //         console.log(res)
+    //     }
+    //   })
+
     //扫码获得教室
     getRoomName() {
         wx.scanCode({
@@ -172,11 +251,35 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+        //如果有正在进行的考勤任务，获得该考勤缓存
+       
+        if (wx.getStorageSync('missionId') != "") {
+           
+            wx.showToast({
+                title: '有考勤正在进行',
+            })
+            this.setData({
+                missionId: wx.getStorageSync('missionId'),
+                roomId: wx.getStorageSync('roomId'),
+                value: "",
+            })
+            //持续获得该考勤数据，并启动定时器持续获得数据
+            console.log("reLoad")
+            this.reLoadAttendance()
 
+
+        } else { //无考勤任务，正常初始化考勤界面
+            this.setData({
+                courseId: options.courseId,
+                value: "点此扫描教授机客户端二维码选择教室"
+            })
+        }
+
+        //初始化数据
         this.setData({
+
             token: wx.getStorageSync('token'),
-            courseId: options.courseId,
-            value: "点此扫描教授机客户端二维码选择教室"
+
         })
         qrcode = new QRcode('canvas', {
             text: this.data.classId,
@@ -216,6 +319,11 @@ Page({
      * 生命周期函数--监听页面卸载
      */
     onUnload: function () {
+        //退出该界面暂停刷新考勤数据，但不停止考勤任务
+        if (this.data.isAttentance == true) {
+            clearInterval(this.data.setInter)
+
+        }
 
     },
 
