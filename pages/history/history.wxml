@@ -4,12 +4,16 @@
 <t-navbar title="Facetick" t-class-title="nav-title" />
 
 
+<view class="scrollBox">
+<scroll-view scroll-y class="scroll" bindscrolltolower="lowerFunction">
+  <t-cell class="cell" wx:for="{{classList}}" hover="true" title="{{item.courseName}}" description="{{item.date}}" align="top" t-class-image="title-image-large" image="/icons/classphoto.png" url="/pages/historyInfo/historyInfo?className={{item.courseName}}&time={{item.date}}&courseId={{item.id}}" />
+</scroll-view>
+</view>
 
-<van-search value="{{ value }}" placeholder="请输入搜索关键词" bind:change="onChange" bind:search="onSearch" />
 
 
-
-<t-cell class="cell" wx:for="{{classList}}" hover="true" title="{{item.courseName}}" description="{{item.date}}" align="top" t-class-image="title-image-large" image="/icons/classphoto.png" url="/pages/historyInfo/historyInfo?className={{item.courseName}}&time={{item.date}}&courseId={{item.id}}" />
+<!-- <view class="list"><t-cell class="cell" wx:for="{{classList}}" hover="true" title="{{item.courseName}}" description="{{item.date}}" align="top" t-class-image="title-image-large" image="/icons/classphoto.png" url="/pages/historyInfo/historyInfo?className={{item.courseName}}&time={{item.date}}&courseId={{item.id}}" />
+</view> -->
 
 
 

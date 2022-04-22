@@ -63,7 +63,7 @@ Page({
     },
 
 
-   
+
 
 
     //弹出层功能
@@ -106,7 +106,7 @@ Page({
             isloading: true
         })
         const token = wx.getStorageSync('token')
-        const url = "/course/list/" + this.data.pageNumber + "/8"
+        const url = "/course/list/" + this.data.pageNumber + "/12"
         myrequest.get(url, {}, {
             token: token
             //sucess
@@ -152,7 +152,7 @@ Page({
             pageNumber: "1"
         })
         const token = wx.getStorageSync('token')
-        const url = "/course/list/" + this.data.pageNumber + "/8"
+        const url = "/course/list/" + this.data.pageNumber + "/12"
         myrequest.get(url, {}, {
             'token': token
             //sucess
@@ -240,13 +240,23 @@ Page({
     /**
      * 页面上拉触底事件的处理函数
      */
-    onReachBottom: function () {
+    // onReachBottom: function () {
 
 
-        if (this.data.isloading) {
 
-            return
-        }
+    //     //无新数据
+    //     if (this.data.isLast == true) {
+    //         return
+    //     }
+    //     this.setData({
+
+    //         pageNumber: parseInt(this.data.pageNumber) + parseInt(1),
+
+    //     })
+
+    //     this.getClass()
+    // },
+    lowerFunction() {
         //无新数据
         if (this.data.isLast == true) {
             return
@@ -259,7 +269,6 @@ Page({
 
         this.getClass()
     },
-
 
     /**
      * 生命周期函数--监听页面初次渲染完成

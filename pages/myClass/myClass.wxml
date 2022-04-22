@@ -42,14 +42,18 @@
 <!-- <t-cell class="cell" wx:for="{{classList}}" hover="true" title="{{item.name}}" description="{{item.id}}" align="top" t-class-image="title-image-large" image="/icons/classphoto.png" url="../myClassInfo/myClassInfo?classId={{item.id}}&className={{item.name}}" /> -->
 
 <!-- ---- -->
-<view wx:for="{{classList}}">
-    <van-swipe-cell right-width="{{ 65 }}" async-close id="swipe-cell" bind:close="onCloseSwipe">
+<view class="scrollBox">
+    <scroll-view scroll-y class="scroll" bindscrolltolower="lowerFunction">
+        <view wx:for="{{classList}}">
+            <van-swipe-cell right-width="{{ 65 }}" async-close id="swipe-cell" bind:close="onCloseSwipe">
 
-        <van-cell-group>
-            <t-cell title="{{item.name}}" description="{{item.id}}" hover="true" t-class-image="title-image-large" image="/icons/classphoto.png" url="../myClassInfo/myClassInfo?classId={{item.id}}&className={{item.name}}" />
-        </van-cell-group>
-        <view slot="right" style="display:flex;">
-            <view slot="right" class="right" bindtap="onDelete" data-index="{{item.id}}">删除</view>
+                <van-cell-group>
+                    <t-cell title="{{item.name}}" description="{{item.id}}" hover="true" t-class-image="title-image-large" image="/icons/classphoto.png" url="../myClassInfo/myClassInfo?classId={{item.id}}&className={{item.name}}" />
+                </van-cell-group>
+                <view slot="right" style="display:flex;">
+                    <view slot="right" class="right" bindtap="onDelete" data-index="{{item.id}}">删除</view>
+                </view>
+            </van-swipe-cell>
         </view>
-    </van-swipe-cell>
+    </scroll-view>
 </view>

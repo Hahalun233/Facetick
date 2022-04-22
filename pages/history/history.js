@@ -109,7 +109,7 @@ Page({
             pageNumber: "1"
         })
         const token = wx.getStorageSync('token')
-        const url = "/mission/history/" + this.data.pageNumber + "/8"
+        const url = "/mission/history/" + this.data.pageNumber + "/12"
         myrequest.get(url, {}, {
             token: token
         }).then(res => {
@@ -230,11 +230,13 @@ Page({
             this.setData({
                 token: token
             })
+        }else{
+            this.reFreshClass()
         }
 
 
 
-        this.reFreshClass()
+        
     },
 
     onHide: function () {
@@ -250,7 +252,22 @@ Page({
     },
 
 
-    onReachBottom: function () {
+    // onReachBottom: function () {
+    //     console.log("bottom")
+    //     if (this.data.isLast == true) {
+    //         return
+    //     }
+    //     this.setData({
+
+    //         pageNumber: parseInt(this.data.pageNumber) + parseInt(1),
+
+    //     })
+
+    //     this.getClass()
+    // },
+
+    lowerFunction(){
+        console.log("bottom")
         if (this.data.isLast == true) {
             return
         }
@@ -262,7 +279,6 @@ Page({
 
         this.getClass()
     },
-
 
     onShareAppMessage: function () {
 

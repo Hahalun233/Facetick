@@ -12,7 +12,9 @@
 }
 
 
-
+.scroll{
+    height:800px
+}
 .continer {
     width: 550rpx;
     padding-top: 80rpx;
