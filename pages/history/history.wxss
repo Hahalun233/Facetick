@@ -1,17 +1,22 @@
 /* pages/history/history.wxss */
 
-.search{
-    color:tomato
+.search {
+    color: tomato
 }
 
-.search_box{
+.search_box {
     margin: 20rpx;
     color: rgb(255, 0, 0);
 }
 
-.btn{
+.btn {
     margin-top: 50rpx;
 }
-.desc{
+
+.desc {
     margin-top: 50rpx;
 }
+
+
+/* 
+ */

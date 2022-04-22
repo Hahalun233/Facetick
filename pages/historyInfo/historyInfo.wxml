@@ -1,19 +1,84 @@
 <!--pages/historyInfo/historyInfo.wxml-->
-<t-navbar
-  title="考勤信息"
-  leftIcon="chevron-left"
-  homeIcon="home"
-  bindgohome="onGoHome"
-  t-class-left-icon="left-icon-back"
-  t-class-home-icon="home-icon"
-  t-class-title="nav-title"
-/>
+<t-navbar title="考勤信息" leftIcon="chevron-left" homeIcon="home" bindgohome="onGoHome" t-class-left-icon="left-icon-back" t-class-home-icon="home-icon" t-class-title="nav-title" />
 
 
 
-<t-cell class="cell" hover="true" title="{{classInfo}}" description="{{className}}" align="top" t-class-image="title-image-large" image="/icons/classphoto.png" />
-<van-cell-group inset>
-  <van-cell title="单元格" value="内容" />
-  <van-cell title="单元格" value="内容" label="描述信息" />
-</van-cell-group>
+<t-cell class="cell" hover="true" title="{{className}}" description="{{time}}" align="top" t-class-image="title-image-large" image="/icons/classphoto.png" />
 
+<van-tabs active="a" color="#216BCB">
+    <van-tab title="已到" name="a">
+
+        <scroll-view scroll-y style="height: 750rpx;">
+            <view wx:for="{{goodStudents}}">
+
+                <van-row>
+                    <van-col span="3" offset="2">
+                        <van-image radius="15px" width="5rem" height="5rem" src="{{item.img}}" />
+                    </van-col>
+
+                    <view class="name">
+                        <van-col span="12" offset="7">
+                            <van-cell-group inset>
+                                <van-cell title="{{item.name}}" center="true" />
+                            </van-cell-group>
+                        </van-col>
+                    </view>
+
+                </van-row>
+            </view>
+        </scroll-view>
+
+
+    </van-tab>
+
+
+    <van-tab title="未到" name="b">
+        <!-- 未到同学名单 -->
+        <scroll-view scroll-y style="height: 750rpx;">
+            <view wx:for="{{badStudents}}">
+
+                <van-row>
+                    <van-col span="3" offset="2">
+                        <van-image radius="15px" width="5rem" height="5rem" src="{{item.img}}" />
+                    </van-col>
+
+                    <view class="name">
+                        <van-col span="12" offset="7">
+                            <van-cell-group inset>
+                                <van-cell title="{{item.name}}" center="true" />
+                            </van-cell-group>
+                        </van-col>
+                    </view>
+
+                </van-row>
+            </view>
+        </scroll-view>
+    </van-tab>
+
+    <van-tab title="申诉" name="b">
+
+        <!-- 未到同学名单 -->
+        <scroll-view scroll-y style="height: 750rpx;">
+            <view wx:for="{{appealStudents}}">
+
+                <van-row>
+                    <van-col span="3" offset="2">
+                        <van-image radius="15px" width="5rem" height="5rem" src="{{item.img}}" />
+                    </van-col>
+
+                    <view class="name">
+                        <van-col span="12" offset="7">
+                            <van-cell-group inset>
+                                <van-cell title="{{item.name}}" center="true" />
+                            </van-cell-group>
+                        </van-col>
+                    </view>
+
+                    <van-col span="3">
+                        <van-button bindtap="onAppeal" data-index="{{item.id}}">补签</van-button>
+                    </van-col>
+                </van-row>
+            </view>
+        </scroll-view>
+    </van-tab>
+</van-tabs>

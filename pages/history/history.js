@@ -22,9 +22,14 @@ Page({
         //请求目标开始页数
         pageNumber: 1,
         isLast: false,
-        pageNumber: 1
+        pageNumber: 1,
+
+        
+       
     },
 
+
+   
 
     changeLogin() {
 
@@ -87,8 +92,8 @@ Page({
 
     },
 
-  reFreshClass() {
-     
+    reFreshClass() {
+
         //若没有登录，拒绝请求数据
         if (this.isLogin) {
             wx.showToast({
@@ -122,72 +127,71 @@ Page({
 
     showPopup() {
         this.setData({
-          show: true
+            show: true
         });
-      },
-  
-      onClose() {
+    },
+
+    onClose() {
         this.setData({
-          show: false
+            show: false
         });
-      },
-  
-  
-  
-      onGetUserInfo() {
+    },
+
+
+
+    onGetUserInfo() {
 
         //顺序执行
-        setTimeout(()=>{
-          
+        setTimeout(() => {
+
             wx.showLoading({
                 title: '正在登陆',
-              })
-              wx.login({
+            })
+            wx.login({
                 timeout: 3000,
                 success: login_res => {
-                  // 2. 小程序通过wx.request()发送code到开发者服务器
-                  myrequest.post("/login", {
-                    code: login_res.code, //临时登录凭证
-                    
-                  },{
-                    'content-type': 'application/x-www-form-urlencoded'
-                  }).then(hres => {
-                    if (hres.code == 200) {
-                      // 7.小程序存储skey（自定义登录状态）到本地
-                      wx.setStorageSync('token', hres.data.token);
-                    } else {
-                      console.log('服务器异常');
-                      wx.showToast({
-                        title: '登录失败',
-                        duration: 1500,
-                      })
-                    }
-                    
-                    wx.showToast({
-                      title: '登录成功',
-                      duration: 1500,
+                    // 2. 小程序通过wx.request()发送code到开发者服务器
+                    myrequest.post("/login", {
+                        code: login_res.code, //临时登录凭证
+
+                    }, {
+                        'content-type': 'application/x-www-form-urlencoded'
+                    }).then(hres => {
+                        if (hres.code == 200) {
+                            // 7.小程序存储skey（自定义登录状态）到本地
+                            wx.setStorageSync('token', hres.data.token);
+                        } else {
+                            console.log('服务器异常');
+                            wx.showToast({
+                                title: '登录失败',
+                                duration: 1500,
+                            })
+                        }
+
+                        wx.showToast({
+                            title: '登录成功',
+                            duration: 1500,
+                        })
                     })
-                  })
                 },
-                
-              })
-            setTimeout(()=>{
-                
+
+            })
+            setTimeout(() => {
                 this.reFreshClass()
-            },2000)
+            }, 2000)
 
-        },1000)
-        
-            
-        
-  
-  
+        }, 1000)
+
+
+
+
+
         this.onClose()
-       
-  
-      },
 
-  
+
+    },
+
+
 
     onLoad: function (options) {
 

@@ -10,7 +10,15 @@ Page({
         //搜索内容
         value: '',
         //班级列表
-        classList: [],
+        classList: [{
+                id: "123",
+                name: "Java"
+            },
+            {
+                id: "183",
+                name: "Java"
+            }
+        ],
         //节流阀
         isloading: false,
         //请求目标开始页数
@@ -24,15 +32,38 @@ Page({
         //登陆状态
         isLogin: false,
         //是否是最后一页
-        isLast:false,
+        isLast: false,
+
+
 
     },
 
-    // selectClass(e){
 
-    //     var classNumber = e.currentTarget.dataset.name
-        
-    // },
+
+    onDelete(e) {
+
+
+        wx.showModal({
+            title: '提示',
+            content: '确定删除？',
+            success: res => {
+                var id = e.currentTarget.dataset['index'];
+
+                var url = "/course/delete/" + id
+                myrequest.get(url, {}, {
+                    token: wx.getStorageSync('token')
+                }).then(res => {
+                    console.log(res)
+                })
+
+                this.refrashClass()
+            }
+        })
+
+    },
+
+
+   
 
 
     //弹出层功能
@@ -53,7 +84,7 @@ Page({
     },
 
 
- 
+
 
 
 
@@ -81,11 +112,11 @@ Page({
             //sucess
         }).then(res => {
 
-           
 
-            if(res.data.hasNext==false){
+
+            if (res.data.hasNext == false) {
                 this.setData({
-                    isLast : true
+                    isLast: true
                 })
             }
 
@@ -100,7 +131,7 @@ Page({
         })
 
 
-    
+
     },
 
     //刷新班级列表
@@ -127,7 +158,7 @@ Page({
             //sucess
         }).then(res => {
 
-          
+
 
             this.setData({
                 classList: res.data.courses
@@ -148,9 +179,9 @@ Page({
 
     onChangeSearch(e) {
         this.setData({
-          value: e.detail,
+            value: e.detail,
         });
-      },
+    },
 
     addClass() {
 
@@ -161,7 +192,7 @@ Page({
             token: wx.getStorageSync('token')
         }).then(res => {
             if (res.code == "200") {
-                
+
                 wx.showToast({
                     title: '添加成功',
                 })
@@ -174,7 +205,7 @@ Page({
         })
 
         this.setData({
-            isLast:false,
+            isLast: false,
             className: null
         })
 
@@ -195,14 +226,14 @@ Page({
 
     onSearch() {
         Toast('搜索' + this.data.value);
-      },
+    },
 
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
         this.setData({
-            
+
         })
     },
 
@@ -211,13 +242,13 @@ Page({
      */
     onReachBottom: function () {
 
-        
+
         if (this.data.isloading) {
-           
+
             return
         }
         //无新数据
-        if(this.data.isLast==true){
+        if (this.data.isLast == true) {
             return
         }
         this.setData({
@@ -247,7 +278,7 @@ Page({
                 //账号在线
                 if (res.code == 200) {
                     this.setData({
-                        isLast:false
+                        isLast: false
                     })
                     this.changeLogin();
                 }
@@ -256,7 +287,7 @@ Page({
         this.refrashClass()
     },
 
-   
+
     onHide: function () {
 
     },
@@ -265,7 +296,7 @@ Page({
 
     },
 
-   
+
     onPullDownRefresh: function () {
         this.refrashClass();
     },

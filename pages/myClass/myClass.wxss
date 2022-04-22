@@ -1,25 +1,42 @@
 /* pages/myClass/myClass.wxss */
-.addBtn{
+.addBtn {
     position: fixed;
-    
 
- height:42px;
 
-bottom: 30px;
+    height: 42px;
 
-right: 20px;
-z-index: 5;
+    bottom: 30px;
+
+    right: 20px;
+    z-index: 5;
 }
 
 
 
-.continer{
+.continer {
     width: 550rpx;
     padding-top: 80rpx;
     margin: 10rpx;
-    
+
 }
-.confirmBtn{
+
+.confirmBtn {
     text-align: center;
     margin-top: 100rpx;
 }
+
+
+
+.delete{
+    display: flex;
+}
+
+.right{
+    background-color: red;
+    height: 78px;
+    width: 65px;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }

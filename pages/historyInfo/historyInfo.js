@@ -1,3 +1,5 @@
+import myrequest from "../../utils/request"
+
 // pages/historyInfo/historyInfo.js
 Page({
 
@@ -5,21 +7,28 @@ Page({
    * 页面的初始数据
    */
   data: {
-    classInfo: "Java程序设计",
-    className: "RB软工数182"
+    className: null,
+    time: null,
+    courseId:null,
+    token:null,
+    goodStudents:[],
+    badStdents:[],
+    appealStudents:[],
   },
 
-  onGoHomee(){
-    wx.switchTab({
-      url: '../../pages/history/history',
+  onAppeal(e){
+    wx.showModal({
+      title:"提示",
+      content:"确认为该学生补签？",
+      success:(res)=>{
+        var url = "/mission/setproblem/"+e.currentTarget.dataset['index']+"/"+this.data.courseId
+        myrequest.get(url,{},{token:this.data.token}).then(res=>{
+          console.log(res)
+        })
+      }
+
     })
   },
-  onGoHome(){
-    wx.navigateTo({
-      url: '/pages/history',
-    });
-  },
-
 
 
 
@@ -27,7 +36,21 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.setData({
+      token:wx.getStorageSync('token'),
+      courseId:options.courseId,
+      className:options.className,
+      time:options.time
+    })
 
+    var url = "/mission/status/"+this.data.courseId
+    myrequest.get(url,{},{token:this.data.token}).then(res=>{
+      this.setData({
+        goodStudents:res.data.presentList,
+        badStdents:res.data.absentList,
+        appealStudents:res.data.problemList
+      })
+    })
   },
 
   /**

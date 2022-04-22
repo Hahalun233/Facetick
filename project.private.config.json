@@ -41,6 +41,12 @@
                     "pathName": "pages/Attendance/Attendance",
                     "query": "",
                     "scene": null
+                },
+                {
+                    "name": "historyInfo",
+                    "pathName": "pages/historyInfo/historyInfo",
+                    "query": "",
+                    "scene": null
                 }
             ]
         }

@@ -12,7 +12,7 @@
     <view class="buttonContiner">
       <van-col>
         <van-row span="8">
-          <van-button  round type="info"    bindtap="toAttendancePage">发起签到</van-button>
+          <van-button round type="info" bindtap="toAttendancePage">发起签到</van-button>
         </van-row>
         <view class="addContiner">
           <van-row span="8">
@@ -37,20 +37,27 @@
 
 <view wx:for="{{studentList}}">
 
-  <van-row>
-    <van-col span="4" offset="3">
-      <van-image radius="15px" width="5rem" height="5rem" src="{{item.img}}" />
-    </van-col>
+  <van-swipe-cell right-width="{{ 65 }}" async-close id="swipe-cell" bind:close="onCloseSwipe">
 
-    <view class="name">
-      <van-col span="8" offset="8">
-        <van-cell-group inset>
-          <van-cell title="{{item.name}}" center="true" />
-        </van-cell-group>
+    <van-row>
+      <van-col span="4" offset="3">
+        <van-image radius="15px" width="5rem" height="5rem" src="{{item.img}}" />
       </van-col>
-    </view>
 
-  </van-row>
+      <view class="name">
+        <van-col span="8" offset="8">
+          <van-cell-group inset>
+            <van-cell title="{{item.name}}" center="true" />
+          </van-cell-group>
+        </van-col>
+      </view>
+
+
+    </van-row>
+    <view slot="right" style="display:flex;">
+      <view slot="right" class="right" bindtap="onDelete" data-index="{{item.id}}">删除</view>
+    </view>
+  </van-swipe-cell>
 </view>
 
 
@@ -142,10 +149,10 @@
   <view class="attendanceBtn">
     <van-col>
       <van-row>
-        <van-button  type="info" bindtap="startAttendance">开始考勤</van-button>
+        <van-button type="info" bindtap="startAttendance">开始考勤</van-button>
       </van-row>
       <van-row>
-        <van-button  type="info" bindtap="pause">结束考勤</van-button>
+        <van-button type="info" bindtap="pause">结束考勤</van-button>
       </van-row>
     </van-col>
   </view>

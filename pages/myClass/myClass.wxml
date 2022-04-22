@@ -3,8 +3,7 @@
 
 <t-navbar title="Facetick" t-class-title="nav-title" />
 
-<van-search value="{{ value }}" placeholder="请输入搜索关键词"   bind:search="onSearch"
-  bind:cancel="onCancel"  bind:change="onChangeSearch" />
+
 
 
 
@@ -14,14 +13,6 @@
     <t-button class="addBtn" theme="primary" size="large" icon="add" shape="circle" bindtap="showPopup"></t-button>
 
 </view>
-
-
-
-<!-- 班级列表 -->
-
-
-<t-cell class="cell" wx:for="{{classList}}" hover="true" title="{{item.name}}" description="{{item.id}}" align="top" t-class-image="title-image-large" image="/icons/classphoto.png" url="../myClassInfo/myClassInfo?classId={{item.id}}&className={{item.name}}"/>
-
 
 
 <!-- 添加班级弹窗 -->
@@ -42,3 +33,23 @@
 
     </view>
 </van-popup>
+
+
+
+<!-- 班级列表 -->
+
+
+<!-- <t-cell class="cell" wx:for="{{classList}}" hover="true" title="{{item.name}}" description="{{item.id}}" align="top" t-class-image="title-image-large" image="/icons/classphoto.png" url="../myClassInfo/myClassInfo?classId={{item.id}}&className={{item.name}}" /> -->
+
+<!-- ---- -->
+<view wx:for="{{classList}}">
+    <van-swipe-cell right-width="{{ 65 }}" async-close id="swipe-cell" bind:close="onCloseSwipe">
+
+        <van-cell-group>
+            <t-cell title="{{item.name}}" description="{{item.id}}" hover="true" t-class-image="title-image-large" image="/icons/classphoto.png" url="../myClassInfo/myClassInfo?classId={{item.id}}&className={{item.name}}" />
+        </van-cell-group>
+        <view slot="right" style="display:flex;">
+            <view slot="right" class="right" bindtap="onDelete" data-index="{{item.id}}">删除</view>
+        </view>
+    </van-swipe-cell>
+</view>

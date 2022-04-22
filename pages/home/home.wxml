@@ -4,8 +4,8 @@
 
 <view class='container'>
   <view class='header'>
-    <open-data type="userAvatarUrl" class='avatar'></open-data>
-    <open-data type="userNickName" class='name'></open-data>
+    <van-image round width="6rem" height="6rem" src="/assets/images/logo.png" />
+    <text wx:if="{{tchName}}" style="color:aliceblue">{{tchName}}</text>
   </view>
 
   <view>
@@ -18,7 +18,7 @@
         <!-- 弹出登录申请 -->
         <!--components/login-pop/login-pop.wxml-->
 
-        <van-popup show="{{ showLogin }}" closeable round position="bottom" custom-style="height: 30%;" bind:close="onCloseLogin">
+        <van-popup show="{{ showLogin }}" closeable round position="bottom" custom-style="height: 30%;" >
 
 
           <view class="desc">
@@ -43,10 +43,35 @@
 
     
 
-      <van-cell clickable title="加入班级" bind:click="onScanCode" />
+      <van-cell clickable title="完善信息" bind:click="showPopup" />
       <van-cell clickable title="客服反馈" />
       <van-cell clickable title="关于" />
     </van-cell-group>
 
   </view>
 </view>
+
+
+ <!-- 完善信息弹窗 -->
+ <van-popup show="{{  showGetInfo }}" position="center" bind:close="onClose" round closeable="true" custom-style="height: 70%">
+
+<view class="continer">
+
+
+  <view class="field">
+    <van-cell-group>
+      <van-field model:value="{{ tchName }}" placeholder="请输入真实姓名" clickable="true" required="true"  />
+      <van-field model:value="{{ tchNo }}" placeholder="请输入学号" clickable="true" required="true" />
+    </van-cell-group>
+  </view>
+
+
+  <view class="confirmBtn">
+    <van-button type="default" round color="#216BCB" bindtap="upLoadInfo">上传信息</van-button>
+  </view>
+
+
+</view>
+
+
+</van-popup>

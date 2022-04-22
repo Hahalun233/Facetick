@@ -13,7 +13,13 @@ Page({
         //定时器
         time: '0',
         imageURL: "/icons/classphoto.png",
-        studentList: [],
+        studentList: [{
+            name: "测试",
+            img: "/assets/images/logo.png"
+        }, {
+            name: "测试",
+            img: "/assets/images/logo.png"
+        }],
         token: null,
         //请求目标开始页数
         pageNumber: 1,
@@ -41,6 +47,20 @@ Page({
         badStudents: []
 
 
+    },
+
+    onDelete(e) {
+        wx.showModal({
+            title: '提示',
+            content: '确定删除？',
+            success: res => {
+                var url = "/student/delete/"+this.data.text+"/"+e.currentTarget.dataset['index']
+                myrequest.get(url,{},{token:this.data.token}).then(res=>{
+                   
+                })
+               this.refrashStudent()
+            }
+        })
     },
 
     //定时器
@@ -87,7 +107,7 @@ Page({
                 isloading: false
             })
         })
-       
+
     },
 
     refrashStudent() {
@@ -177,7 +197,7 @@ Page({
 
     //跳转至签到界面
     toAttendancePage() {
-        
+
         wx.redirectTo({
             url: '/pages/Attendance/Attendance?courseId=' + this.data.text,
         })

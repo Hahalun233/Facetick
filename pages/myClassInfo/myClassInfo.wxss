@@ -62,3 +62,13 @@ text {
 .bar {
     margin-top: 10rpx;
 }
+
+.right{
+    background-color: red;
+    height: 78px;
+    width: 65px;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
