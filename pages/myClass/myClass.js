@@ -44,19 +44,23 @@ Page({
 
 
         wx.showModal({
-            title: '提示',
-            content: '确定删除？',
+            title: '确定删除班级？',
+            content: '该班级考勤记录会一并删除',
             success: res => {
-                var id = e.currentTarget.dataset['index'];
+                if (res.confirm == true) {
+                    var id = e.currentTarget.dataset['index'];
 
-                var url = "/course/delete/" + id
-                myrequest.get(url, {}, {
-                    token: wx.getStorageSync('token')
-                }).then(res => {
-                    console.log(res)
-                })
+                    var url = "/course/delete/" + id
+                    myrequest.get(url, {}, {
+                        token: wx.getStorageSync('token')
+                    }).then(res => {
+                        console.log(res)
+                        this.refrashClass()
+                    })
+                }
 
-                this.refrashClass()
+
+
             }
         })
 

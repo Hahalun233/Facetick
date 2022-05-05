@@ -72,3 +72,14 @@ text {
     align-items: center;
     justify-content: center;
   }
+  .addBtn {
+    position: fixed;
+
+
+    height: 42px;
+
+    bottom: 30px;
+
+    right: 20px;
+    z-index: 5;
+}

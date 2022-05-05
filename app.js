@@ -13,7 +13,7 @@ App({
     show: true, 
     userInfo: null,
     hasUserInfo: false,
-    
+    baseurl:"http://192.168.96.188:8094/api/v1/tc"
   },
 
   onLaunch() {

@@ -9,7 +9,7 @@ Page({
 
     showLogin: false,
     showGetInfo: false,
-    tchName: null,
+    tchName: "杨老师",
     tchNo: null,
   },
   upLoadInfo() {

@@ -23,7 +23,7 @@
 
         <van-cell-group>
             <van-field model:value="{{ className }}" placeholder="请输入班级名称" clickable="true" required="true" bind:change="onChange" />
-            <!-- <van-field model:value="{{ classRoom }}" placeholder="请输入教室" clickable="true" bind:change="onChange" /> -->
+            <van-field model:value="{{ classRoom }}" placeholder="请输入教室" clickable="true" bind:change="onChange" required="true"  />
         </van-cell-group>
 
         <view class="confirmBtn">

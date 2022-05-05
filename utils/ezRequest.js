@@ -1,5 +1,5 @@
-const BASE_URL = "http://124.222.177.142:8094/api/v1/tc"
-// const BASE_URL = "http://172.20.10.3:8082/api/v1/tc"
+// const BASE_URL = "http://124.222.177.142:8094/api/v1/tc"
+const BASE_URL = "http://192.168.96.188:8094/api/v1/tc"
 class ezRequest {
   request(url, method, params,header) {
 

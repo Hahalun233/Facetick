@@ -59,7 +59,7 @@
 
         <!-- 未到同学名单 -->
         <scroll-view scroll-y style="height: 750rpx;">
-            <view wx:for="{{appealStudents}}">
+            <view wx:for="{{goodStudents}}">
 
                 <van-row>
                     <van-col span="3" offset="2">
@@ -67,14 +67,14 @@
                     </van-col>
 
                     <view class="name">
-                        <van-col span="12" offset="7">
+                        <van-col span="12" offset="3">
                             <van-cell-group inset>
                                 <van-cell title="{{item.name}}" center="true" />
                             </van-cell-group>
                         </van-col>
                     </view>
 
-                    <van-col span="3">
+                    <van-col span="4">
                         <van-button bindtap="onAppeal" data-index="{{item.id}}">补签</van-button>
                     </van-col>
                 </van-row>

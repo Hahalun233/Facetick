@@ -168,3 +168,22 @@
 .about .iconfont {
   opacity: 0.8;
 }
+
+.continer{
+  width: 550rpx;
+  padding-top: 80rpx;
+  margin: 10rpx;
+  
+}
+.confirmBtn{
+  text-align: center;
+  margin-top: 100rpx;
+}
+
+.upLoader{
+  text-align: center;
+}
+
+.field{
+  margin-top: 20rpx;
+}
