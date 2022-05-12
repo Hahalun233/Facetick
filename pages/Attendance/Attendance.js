@@ -14,6 +14,7 @@ Page({
         setInter: '', //设置定时器
         imageURL: "/icons/classphoto.png",
         roomId: null,
+        roomName:null,
         //考勤id
         missionId: null,
         //进度条参数
@@ -60,7 +61,7 @@ Page({
             return
         }
 
-wx.setStorageSync('missionId', )
+        wx.setStorageSync('missionId', )
         //清除计时器  即清除setInter
         clearInterval(this.data.setInter)
         //通知服务器停止
@@ -78,7 +79,7 @@ wx.setStorageSync('missionId', )
             wx.showToast({
                 title: '考勤已停止',
             })
-            
+
         })
     },
 
@@ -90,7 +91,7 @@ wx.setStorageSync('missionId', )
         if (this.data.isAttentance == true) {
             wx.showToast({
                 title: '考勤正在进行',
-                icon:'error'
+                icon: 'error'
             })
             return
         }
@@ -118,8 +119,8 @@ wx.setStorageSync('missionId', )
 
             })
             //将考勤任务id缓存，用于退出再返回改界面时继续任务
-            wx.setStorageSync('missionId',this.data.missionId)
-            wx.setStorageSync('roomId',this.data.roomId)
+            wx.setStorageSync('missionId', this.data.missionId)
+            wx.setStorageSync('roomId', this.data.roomId)
             //获得考勤结果
             var url = '/mission/status/' + this.data.missionId
             myrequest.get(url, {
@@ -141,7 +142,7 @@ wx.setStorageSync('missionId', )
                 }, {
                     token: _this.data.token
                 }).then(res => {
-                    var p = (res.data.present / res.data.total)*100
+                    var p = (res.data.present / res.data.total) * 100
                     console.log(p)
                     _this.setData({
                         progress: p,
@@ -190,14 +191,14 @@ wx.setStorageSync('missionId', )
             }, {
                 token: _this.data.token
             }).then(res => {
-                var p = (res.data.present / res.data.total)*100
+                var p = (res.data.present / res.data.total) * 100
                 console.log(p)
                 _this.setData({
                     progress: p,
                     goodStudents: res.data.presentList,
                     badStudents: res.data.absentList,
                 })
-                
+
             })
 
             console.log('请求一次')
@@ -223,15 +224,24 @@ wx.setStorageSync('missionId', )
 
     //扫码获得教室
     getRoomName() {
+        //扫码结果
         wx.scanCode({
             success: res => {
-
                 this.setData({
-                    roomId: res.result,
-                    value: null
+                    roomId: res.result
                 })
 
+                var url = "/mission/clientname/" + res.result
+                myrequest.get(url, {}, {
+                    token: this.data.token
+                }).then(hres => {
+                    console.log(hres)
+                    this.setData({
+                        roomName: hres.data.clientname,
+                        value: ""
+                    })
 
+                })
 
             }
         })
@@ -252,9 +262,9 @@ wx.setStorageSync('missionId', )
      */
     onLoad: function (options) {
         //如果有正在进行的考勤任务，获得该考勤缓存
-       
+
         if (wx.getStorageSync('missionId') != "") {
-           
+
             wx.showToast({
                 title: '有考勤正在进行',
             })

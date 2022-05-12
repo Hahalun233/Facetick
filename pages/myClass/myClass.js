@@ -191,7 +191,8 @@ Page({
 
 
         myrequest.post("/course/add", {
-            name: this.data.className
+            name: this.data.className,
+            room:this.data.classRoom
         }, {
             token: wx.getStorageSync('token')
         }).then(res => {
