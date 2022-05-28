@@ -102,10 +102,6 @@ Page({
             })
             return
         }
-
-
-
-
         //开启教师机摄像头
         const url = "/mission/launch/" + this.data.courseId + "/" + this.data.roomId
         console.log(url)
@@ -142,7 +138,8 @@ Page({
                 }, {
                     token: _this.data.token
                 }).then(res => {
-                    var p = (res.data.present / res.data.total) * 100
+                    var c = (res.data.present / res.data.total) * 100
+                    var p = Math.trunc(c)
                     console.log(p)
                     _this.setData({
                         progress: p,

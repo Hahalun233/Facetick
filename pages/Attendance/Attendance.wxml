@@ -12,7 +12,7 @@
 
 <van-row>
     <van-col span="16">
-        <van-card desc="{{roomId}}" title="" thumb="{{ imageURL }}">
+        <van-card desc="{{roomName}}" title="" thumb="{{ imageURL }}">
         </van-card>
     </van-col>
     <van-col span="8">

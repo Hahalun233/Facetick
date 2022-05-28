@@ -35,7 +35,7 @@
     <van-tab title="未到" name="b">
         <!-- 未到同学名单 -->
         <scroll-view scroll-y style="height: 750rpx;">
-            <view wx:for="{{badStudents}}">
+            <view wx:for="{{badStdents}}">
 
                 <van-row>
                     <van-col span="3" offset="2">
@@ -59,7 +59,7 @@
 
         <!-- 未到同学名单 -->
         <scroll-view scroll-y style="height: 750rpx;">
-            <view wx:for="{{goodStudents}}">
+            <view wx:for="{{appealStudents}}">
 
                 <van-row>
                     <van-col span="3" offset="2">
